@@ -31,6 +31,11 @@ return {
     dependencies = { "mason-lspconfig.nvim", "cmp-nvim-lsp" },
     config = function()
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local navbuddy = require("nvim-navbuddy")
+
+      local on_attach = function(client, bufnr)
+        navbuddy.attach(client, bufnr)
+      end
 
       -- Setup language servers using vim.lsp.config (Neovim 0.11+)
       vim.lsp.config("lua_ls", {
@@ -48,36 +53,42 @@ return {
             telemetry = { enable = false },
           },
         },
+        on_attach = on_attach,
       })
 
       vim.lsp.config("pyright", {
         name = "pyright",
         cmd = { "pyright-langserver", "--stdio" },
         root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "pyrightconfig.json" },
+        on_attach = on_attach,
       })
 
       vim.lsp.config("ts_ls", {
         name = "ts_ls",
         cmd = { "typescript-language-server", "--stdio" },
         root_markers = { "tsconfig.json", "jsconfig.json", "package.json" },
+        on_attach = on_attach,
       })
 
       vim.lsp.config("html", {
         name = "html",
         cmd = { "html-languageserver", "--stdio" },
         root_markers = { ".html-validate.json", "package.json" },
+        on_attach = on_attach,
       })
 
       vim.lsp.config("cssls", {
         name = "cssls",
         cmd = { "css-languageserver", "--stdio" },
         root_markers = { "package.json" },
+        on_attach = on_attach,
       })
 
       vim.lsp.config("jsonls", {
         name = "jsonls",
         cmd = { "json-languageserver", "--stdio" },
         root_markers = { "package.json" },
+        on_attach = on_attach,
       })
 
       vim.lsp.config("rust_analyzer", {
@@ -89,6 +100,7 @@ return {
             diagnostics = { enable = true },
           },
         },
+        on_attach = on_attach,
       })
 
       -- Auto-enable LSP for recognized filetypes

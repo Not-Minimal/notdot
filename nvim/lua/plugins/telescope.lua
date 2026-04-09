@@ -11,7 +11,6 @@ return {
     config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
-      
       telescope.setup({
         defaults = {
           prompt_prefix = " ",
@@ -57,7 +56,10 @@ return {
         pickers = {
           find_files = {
             theme = "dropdown",
-            previewer = false,
+            previewer = true,
+            preview = {
+              hide_on_startup = false,
+            },
           },
           live_grep = {
             theme = "dropdown",
