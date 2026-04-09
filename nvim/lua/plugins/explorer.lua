@@ -27,8 +27,6 @@ return {
             ["<space>"] = "toggle_node",
             ["<2-LeftMouse>"] = "open",
             ["<cr>"] = "open",
-            ["S"] = "open_split",
-            ["s"] = "open_vsplit",
             ["t"] = "open_tabnew",
             ["w"] = "open_window",
             ["C"] = "close_node",
