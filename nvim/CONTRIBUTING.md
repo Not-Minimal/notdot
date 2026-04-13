@@ -129,7 +129,7 @@ Si agregas un plugin nuevo:
 1. Agrégalo a `init.lua` en la sección apropriada
 2. Comenta para qué sirve
 3. Actualiza el README
-4. Asegúrate de usar lazy loading
+4. Asegúrate de seguir los estándares de código
 
 ## 🎯 Áreas de Contribución
 

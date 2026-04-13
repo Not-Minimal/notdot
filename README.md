@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen)
 
-Configuración moderna, minimalista y rápida de Neovim para programadores.
+Configuración moderna, minimalista y rápida de Neovim 0.12.1+ con LSP nativo para programadores.
 
 **[Instalación Rápida](#-instalación-rápida)** • **[Características](#-características)** • **[Atajos](#️-atajos)** • **[Docs](./nvim/)** • **[Contribuir](./nvim/CONTRIBUTING.md)**
 
@@ -15,7 +15,7 @@ Configuración moderna, minimalista y rápida de Neovim para programadores.
 
 ## ✨ Características
 
-- 🚀 **Rápido** - Lazy loading de plugins, startup rápido
+- 🚀 **Rápido** - Startup rápido con configuración optimizada
 - 🎯 **LSP Completo** - Soporte para 10+ lenguajes (TypeScript, Python, Rust, Lua, etc.)
 - 📦 **Dashboard Personalizado** - Inicio hermoso con snacks.nvim
 - ⌨️ **Atajos Organizados** - Menú jerárquico con which-key
@@ -47,11 +47,9 @@ ln -s ~/.config/dotfiles/nvim ~/.config/nvim
 nvim
 ```
 
-✨ Los plugins se descargarán automáticamente.
+✨ Todos los plugins están pre-configurados.
 
 Para guía completa, ver [INSTALL.md](./nvim/INSTALL.md).
-
-## 📚 Documentación
 
 - **[README.md](./nvim/README.md)** - Guía completa, atajos, configuración
 - **[INSTALL.md](./nvim/INSTALL.md)** - Instalación paso a paso

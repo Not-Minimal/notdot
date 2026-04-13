@@ -169,18 +169,23 @@ sudo apt install xclip  # o xsel
 
 ### Los plugins no se descargan
 
-Intenta:
+Todos los plugins deben estar ya incluidos. Si hay problemas:
 
-```vim
-:Lazy sync
-```
+1. Verifica que el enlace simbólico esté correcto:
+   ```bash
+   ls -la ~/.config/nvim
+   ```
 
-O elimina la carpeta y reinicia:
+2. Revisa los logs:
+   ```vim
+   :checkhealth
+   ```
 
-```bash
-rm -rf ~/.local/share/nvim/site/pack/vim-pack-loader
-nvim
-```
+3. Si es necesario, elimina la carpeta de cache:
+   ```bash
+   rm -rf ~/.local/share/nvim/site/pack/vim-pack-loader
+   nvim
+   ```
 
 ### Terminal flotante no abre
 

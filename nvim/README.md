@@ -19,7 +19,7 @@ Configuración moderna y minimalista de Neovim para programadores que usan Lua. 
 - **Símbolos de Código** - Visualizar structure del código con pickers interactivos
 - **Diagnósticos Mejorados** - Navegación y visualización clara de errores
 - **Tema Moderno** - Tema Tundra oscuro y minimalista
-- **Rendimiento** - Lazy loading de plugins para inicio rápido
+- **Rendimiento** - Startup rápido con configuración optimizada
 
 ## 📋 Requisitos
 
@@ -49,13 +49,14 @@ sudo apt install neovim ripgrep fd-find
 git clone https://github.com/Not-Minimal/notdot.git ~/.config/dotfiles
 
 # 2. Crear enlace simbólico para nvim
+[ -d ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.backup
 ln -s ~/.config/dotfiles/nvim ~/.config/nvim
 
-# 3. Abrir Neovim (instalará plugins automáticamente)
+# 3. Abrir Neovim
 nvim
 ```
 
-Lazy.nvim descargará e instalará todos los plugins automáticamente en tu primer inicio.
+Todos los plugins y configuraciones están listos para usar.
 
 ## 📦 Plugins Instalados
 
