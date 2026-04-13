@@ -1,8 +1,9 @@
 vim.g.mapleader = " "
+vim.opt.relativenumber = true
 vim.o.background = "dark"
 vim.o.backup = false
 vim.o.expandtab = true
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 vim.o.incsearch = true
 vim.o.number = true
 vim.o.scrolloff = 8
@@ -12,15 +13,30 @@ vim.o.signcolumn = "yes"
 vim.o.smartindent = true
 vim.o.softtabstop = 4
 vim.o.swapfile = false
-vim.o.tabstop = 4
+vim.o.tabstop = 2
 vim.o.termguicolors = true
 vim.o.updatetime = 50
 vim.o.winborder = "rounded"
 vim.o.wrap = false
+vim.opt.title = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.backspace = { "start", "eol", "indent" }
+vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
+vim.opt.wildignore:append({ "*/node_modules/*" })
+vim.opt.splitbelow = true -- Put new windows below current
+vim.opt.splitright = true -- Put new windows right of current
+-- Undercurl
+vim.cmd([[let &t_Cs = "\e[4:3m"]])
+vim.cmd([[let &t_Ce = "\e[4:0m"]])
+
+-- Add asterisks in block comments
+vim.opt.formatoptions:append({ "r" })
 
 -- Plugins
 vim.pack.add({
 	{ src = "https://github.com/sam4llis/nvim-tundra" },
+	{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/tpope/vim-sleuth" },
 	{ src = "https://github.com/rcarriga/nvim-notify" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
@@ -442,6 +458,10 @@ vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
+-- Split window
+vim.keymap.set("n", "qq", ":split<Return>",{ noremap = true, silent = true })
+vim.keymap.set("n", "sv", ":vsplit<Return>", { noremap = true, silent = true })
+
 
 vim.keymap.set('n', '<Space><Space>', ':Telescope find_files<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Space>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
