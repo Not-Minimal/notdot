@@ -488,20 +488,115 @@ vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
 		local bufnr = args.buf
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local map = function(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, noremap = true, silent = true })
 		end
 
-		map('n', 'K', vim.lsp.buf.hover, 'LSP Hover')
-		map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
-		map('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration')
-		map('n', 'gi', vim.lsp.buf.implementation, 'Go to implementation')
-		map('n', 'gr', vim.lsp.buf.references, 'References')
-		map('n', '<Space>rn', vim.lsp.buf.rename, 'Rename symbol')
-		map({ 'n', 'v' }, '<Space>ca', vim.lsp.buf.code_action, 'Code action')
-		map('n', '<Space>f', function()
+		-- Basic Navigation
+		map('n', 'K', vim.lsp.buf.hover, 'Hover Info')
+		map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature Help')
+
+		-- Navigation keymaps (registered in which-key)
+		map('n', '<leader>lnd', vim.lsp.buf.definition, 'Go to Definition')
+		map('n', '<leader>lnD', vim.lsp.buf.declaration, 'Go to Declaration')
+		map('n', '<leader>lni', vim.lsp.buf.implementation, 'Go to Implementation')
+		map('n', '<leader>lnr', vim.lsp.buf.references, 'References')
+		map('n', '<leader>lnt', vim.lsp.buf.type_definition, 'Type Definition')
+
+		-- Refactoring keymaps (registered in which-key)
+		map('n', '<leader>lrn', vim.lsp.buf.rename, 'Rename Symbol')
+		map({ 'n', 'v' }, '<leader>lra', vim.lsp.buf.code_action, 'Code Action')
+		map('n', '<leader>lrf', function()
 			vim.lsp.buf.format({ async = true })
-		end, 'Format buffer')
+		end, 'Format Buffer')
+
+		-- Imports keymaps (registered in which-key)
+		map('n', '<leader>lio', function()
+			vim.lsp.buf.code_action({
+				context = {
+					only = { "source.organizeImports" }
+				},
+				apply = true
+			})
+		end, 'Organize Imports')
+
+		map('n', '<leader>liu', function()
+			vim.lsp.buf.code_action({
+				context = {
+					only = { "source.removeUnused" }
+				},
+				apply = true
+			})
+		end, 'Remove Unused Imports')
+
+		map('n', '<leader>lim', function()
+			vim.lsp.buf.code_action({
+				context = {
+					only = { "source.addMissingImports" }
+				},
+				apply = true
+			})
+		end, 'Add Missing Imports')
+
+		-- Symbols/Outline keymaps (registered in which-key)
+		map('n', '<leader>lsd', function()
+			if package.loaded['snacks'] then
+				Snacks.picker.lsp_symbols()
+			else
+				vim.lsp.buf.document_symbol()
+			end
+		end, 'Document Symbols')
+
+		map('n', '<leader>lsw', function()
+			if package.loaded['snacks'] then
+				Snacks.picker.lsp_workspace_symbols()
+			else
+				vim.lsp.buf.workspace_symbol()
+			end
+		end, 'Workspace Symbols')
+
+		-- Calls keymaps (registered in which-key)
+		map('n', '<leader>lci', function()
+			if package.loaded['snacks'] then
+				Snacks.picker.lsp_incoming_calls()
+			else
+				vim.lsp.buf.incoming_calls()
+			end
+		end, 'Incoming Calls')
+
+		map('n', '<leader>lco', function()
+			if package.loaded['snacks'] then
+				Snacks.picker.lsp_outgoing_calls()
+			else
+				vim.lsp.buf.outgoing_calls()
+			end
+		end, 'Outgoing Calls')
+
+		-- Diagnostics keymaps (registered in which-key)
+		map('n', '<leader>ldo', vim.diagnostic.open_float, 'Open Diagnostic Float')
+		map('n', '<leader>ldp', vim.diagnostic.goto_prev, 'Previous Diagnostic')
+		map('n', '<leader>ldn', vim.diagnostic.goto_next, 'Next Diagnostic')
+
+		map('n', '<leader>lda', function()
+			if package.loaded['snacks'] then
+				Snacks.picker.diagnostics()
+			else
+				vim.diagnostic.setloclist()
+			end
+		end, 'All Diagnostics')
+
+		map('n', '<leader>ldb', function()
+			if package.loaded['snacks'] then
+				Snacks.picker.diagnostics_buffer()
+			else
+				vim.diagnostic.setqflist()
+			end
+		end, 'Buffer Diagnostics')
+
+		-- Help keymaps (registered in which-key)
+		map('n', '<leader>lhh', vim.lsp.buf.hover, 'Hover Info')
+		map('n', '<leader>lhs', vim.lsp.buf.signature_help, 'Signature Help')
 	end,
 })
 
