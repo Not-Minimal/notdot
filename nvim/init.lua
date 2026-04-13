@@ -299,6 +299,7 @@ require('lualine').setup({
 	extensions = {}
 })
 
+
 -- Mini.files setup
 require('mini.files').setup()
 
