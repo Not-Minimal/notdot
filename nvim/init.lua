@@ -36,6 +36,7 @@ vim.opt.formatoptions:append({ "r" })
 -- Plugins
 vim.pack.add({
 	{ src = "https://github.com/sam4llis/nvim-tundra" },
+	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
 	{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/tpope/vim-sleuth" },
 	{ src = "https://github.com/rcarriga/nvim-notify" },
@@ -123,6 +124,27 @@ require("noice").setup({
 	},
 })
 
+require("smear_cursor").setup({
+cursor_color = "#ffffff",
+   particles_enabled = true,
+   stiffness = 0.5,
+   trailing_stiffness = 0.2,
+   trailing_exponent = 5,
+   damping = 0.6,
+   gradient_exponent = 0,
+   gamma = 1,
+   never_draw_over_target = true, -- if you want to actually see under the cursor
+   hide_target_hack = true,       -- same
+   particle_spread = 1,
+   particles_per_second = 500,
+   particles_per_length = 50,
+   particle_max_lifetime = 800,
+   particle_max_initial_velocity = 20,
+   particle_velocity_from_cursor = 0.5,
+   particle_damping = 0.10,
+   particle_gravity = -80,
+   min_distance_emit_particles = 0,
+})
 -- Mason setup
 require("mason").setup()
 require("mason-lspconfig").setup({
