@@ -1,0 +1,54 @@
+name: Feature Request
+description: Sugerir una nueva característica o mejora
+title: "[FEATURE] "
+labels: ["enhancement"]
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: Describe la característica que quieres
+      placeholder: "Me gustaría agregar..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivación
+      description: ¿Por qué sería útil esta característica?
+      placeholder: "Sería útil porque..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternative
+    attributes:
+      label: Alternativas Consideradas
+      description: Otras formas de resolver esto
+      placeholder: "Podría también..."
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Ejemplo
+      description: Un ejemplo de cómo se vería
+      render: lua
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto Adicional
+      description: Links a plugins, issues relacionados, etc.
+      render: markdown
+
+  - type: checkboxes
+    id: check
+    attributes:
+      label: Verificaciones
+      options:
+        - label: He revisado issues existentes
+          required: true
+        - label: Esto es para mejorar los dotfiles, no un plugin
+          required: false

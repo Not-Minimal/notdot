@@ -1,0 +1,74 @@
+name: Bug Report
+description: Reportar un bug encontrado
+title: "[BUG] "
+labels: ["bug"]
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción del Bug
+      description: Describe qué no está funcionando
+    validations:
+      required: true
+
+  - type: input
+    id: neovim_version
+    attributes:
+      label: Versión de Neovim
+      description: Resultado de `nvim --version`
+      placeholder: "NVIM v0.12.1"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Sistema Operativo
+      description: macOS, Linux, Windows, etc.
+      placeholder: "macOS 13.5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para Reproducir
+      description: Cómo reproducir el problema
+      placeholder: |
+        1. Abre Neovim
+        2. Abre un archivo .ts
+        3. Presiona <leader>lsd
+        4. El problema ocurre...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento Esperado
+      description: Qué debería pasar
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento Actual
+      description: Qué está pasando en cambio
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs/Screenshots
+      description: Pega logs de `:messages` o screenshots
+      render: bash
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuración Personalizada
+      description: ¿Cambiaste algo del init.lua o which-key-config.lua?
+      render: lua
