@@ -42,6 +42,7 @@ vim.pack.add({
 	{ src = "https://github.com/sindrets/diffview.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"},
 	{ src = "https://github.com/akinsho/toggleterm.nvim"},
+	{ src = "https://github.com/folke/which-key.nvim" },
 })
 require("toggleterm").setup({
 	direction = "float",
@@ -84,6 +85,9 @@ function _close_terminal_completely()
 end
 -- Colorscheme
 vim.cmd.colorscheme "tundra"
+
+-- Which-key setup
+require("config.which-key-config")
 
 -- Noice setup
 require("noice").setup({
