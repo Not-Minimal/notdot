@@ -60,6 +60,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"},
 	{ src = "https://github.com/akinsho/toggleterm.nvim"},
 	{ src = "https://github.com/folke/which-key.nvim" },
+	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 })
 require("toggleterm").setup({
 	direction = "float",
@@ -100,6 +101,10 @@ function _close_terminal_completely()
 		})
 	end
 end
+
+-- Lazygit keybinding
+vim.keymap.set("n", "gg", "<Cmd>LazyGit<CR>", { noremap = true, silent = true })
+
 -- Colorscheme
 vim.cmd.colorscheme "tundra"
 
