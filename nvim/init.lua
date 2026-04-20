@@ -46,6 +46,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim.git" },
 	{ src = "https://github.com/neovim/nvim-lspconfig.git" },
 	{ src = "https://github.com/Saghen/blink.cmp", version = "v1.6.0" },
+	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim" },
 	{ src = "https://github.com/echasnovski/mini.files" },
 	{ src = "https://github.com/stevearc/oil.nvim.git" },
@@ -61,7 +62,19 @@ vim.pack.add({
 	{ src = "https://github.com/akinsho/toggleterm.nvim"},
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
+	{ src = "https://github.com/windwp/nvim-autopairs" },
 })
+require('vim._core.ui2').enable({
+    enable = true,
+    msg = {
+        target = "cmd", -- options: cmd(classic), msg(similar to noice)
+        pager = { height = 1 },
+        msg   = { height = 0.5, timeout = 4500 },
+        dialog = { height = 0.5 },
+        cmd    = { height = 0.5 },
+    },
+})
+
 require("toggleterm").setup({
 	direction = "float",
 	open_mapping = [[<C-\>]],
@@ -229,6 +242,9 @@ require("blink.cmp").setup({
 	},
 	fuzzy = { implementation = "prefer_rust" }
 })
+
+-- nvim-autopairs setup
+require("config.autopairs-config")
 
 -- Supermaven setup
 require("supermaven-nvim").setup({
@@ -456,12 +472,20 @@ vim.lsp.config('basedpyright', {
 	capabilities = capabilities,
 })
 
+vim.lsp.config('prisma', {
+	capabilities = capabilities,
+	cmd = { 'prisma-language-server', '--stdio' },
+	filetypes = { 'prisma' },
+	root_dir = require('lspconfig.util').root_pattern('.git', 'package.json'),
+})
+
 -- Enable LSP servers
 vim.lsp.enable({
 	'lua_ls',
 	'ts_ls',
 	'rust_analyzer',
 	'basedpyright',
+	'prisma',
 })
 
 -- Diagnostic configuration
