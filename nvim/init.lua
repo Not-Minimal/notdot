@@ -15,7 +15,7 @@ vim.o.softtabstop = 4
 vim.o.swapfile = false
 vim.o.tabstop = 2
 vim.o.termguicolors = true
-vim.o.updatetime = 50
+vim.o.updatetime = 100
 vim.o.winborder = "rounded"
 vim.o.wrap = false
 vim.opt.title = true
@@ -32,6 +32,9 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
+
+-- Clipboard integration with macOS
+require("config.clipboard-config")
 
 -- Plugins
 vim.pack.add({
@@ -52,6 +55,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim.git" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
@@ -63,6 +67,7 @@ vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 	{ src = "https://github.com/windwp/nvim-autopairs" },
+	{ src = "https://github.com/goolord/alpha-nvim"}
 })
 require('vim._core.ui2').enable({
     enable = true,
@@ -173,63 +178,9 @@ require("mason-lspconfig").setup({
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require("neo-tree").setup({
-        close_if_last_window = true,
-        popup_border_style = "rounded",
-        enable_git_status = true,
-        enable_modified_markers = true,
-        enable_diagnostics = true,
-        sort_case_insensitive = false,
-        window = {
-          position = "left",
-          width = 30,
-          mapping_options = {
-            noremap = true,
-            nowait = true,
-          },
-          mappings = {
-            ["<space>"] = "toggle_node",
-            ["<2-LeftMouse>"] = "open",
-            ["<cr>"] = "open",
-            ["t"] = "open_tabnew",
-            ["w"] = "open_window",
-            ["C"] = "close_node",
-            ["z"] = "close_all_nodes",
-            ["a"] = {
-              "add",
-              config = {
-                show_path = "relative",
-              },
-            },
-            ["A"] = "add_directory",
-            ["d"] = "delete",
-            ["r"] = "rename",
-            ["y"] = "copy_to_clipboard",
-            ["x"] = "cut_to_clipboard",
-            ["p"] = "paste_from_clipboard",
-            ["c"] = "copy",
-            ["m"] = "move",
-            ["q"] = "close_window",
-            ["R"] = "refresh",
-            ["?"] = "show_help",
-            ["<"] = "prev_source",
-            [">"] = "next_source",
-            ["i"] = "show_file_details",
-          },
-        },
-        filesystem = {
-          filtered_items = {
-            hide_dotfiles = false,
-            hide_gitignored = true,
-            hide_hidden = false,
-          },
-          follow_current_file = {
-            enabled = true,
-          },
-          group_empty_dirs = false,
-          use_libuv_file_watcher = true,
-        },
-      })
+-- Neo-tree enhanced configuration
+require("config.neotree-config")
+
 -- blink.cmp setup
 require("blink.cmp").setup({
 	keymap = { preset = 'default' },
@@ -431,78 +382,18 @@ require("tiny-inline-diagnostic").setup({
     },
 })
 
--- LSP Configuration (Neovim 0.12 native)
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-vim.lsp.config('lua_ls', {
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			runtime = { version = 'LuaJIT' },
-			diagnostics = { globals = { 'vim' } },
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-				},
-			},
-			telemetry = { enable = false },
-		},
-	},
+-- Telescope setup
+require('telescope').setup({
+	extensions = {
+		['ui-select'] = {
+			require('telescope.themes').get_dropdown({})
+		}
+	}
 })
+require('telescope').load_extension('ui-select')
 
-vim.lsp.config('ts_ls', {
-	capabilities = capabilities,
-	settings = {
-		typescript = {
-			inlayHints = {
-				includeInlayParameterNameHints = 'all',
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayVariableTypeHints = true,
-			},
-		},
-	},
-})
-
-vim.lsp.config('rust_analyzer', {
-	capabilities = capabilities,
-})
-
-vim.lsp.config('basedpyright', {
-	capabilities = capabilities,
-})
-
-vim.lsp.config('prisma', {
-	capabilities = capabilities,
-	cmd = { 'prisma-language-server', '--stdio' },
-	filetypes = { 'prisma' },
-	root_dir = require('lspconfig.util').root_pattern('.git', 'package.json'),
-})
-
--- Enable LSP servers
-vim.lsp.enable({
-	'lua_ls',
-	'ts_ls',
-	'rust_analyzer',
-	'basedpyright',
-	'prisma',
-})
-
--- Diagnostic configuration
-vim.diagnostic.config({
-	severity_sort = true,
-	update_in_insert = false,
-	float = {
-		border = 'rounded',
-		source = 'if_many',
-	},
-	underline = true,
-	virtual_text = {
-		spacing = 2,
-		source = 'if_many',
-		prefix = '●',
-	},
-})
+-- LSP Configuration (centralized in separate file)
+require('config.lsp-config')
 
 --: Basic keymaps
 -- Global keymaps (window navigation and file explorer)
@@ -516,7 +407,7 @@ vim.keymap.set("n", "sv", ":vsplit<Return>", { noremap = true, silent = true })
 
 
 vim.keymap.set('n', '<Space><Space>', ':Telescope find_files<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Space>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Space>e', '<cmd>lua toggle_neotree()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Space>t', '<Cmd>lua _toggle_terminal()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Space>T', '<Cmd>lua _close_terminal_completely()<CR>', { noremap = true, silent = true })
 --:
@@ -535,125 +426,11 @@ end
 vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
 --:
 
--- LSP keymaps on attach
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(args)
-		local bufnr = args.buf
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		local map = function(mode, lhs, rhs, desc)
-			vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, noremap = true, silent = true })
-		end
-
-		-- Basic Navigation
-		map('n', 'K', vim.lsp.buf.hover, 'Hover Info')
-		map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature Help')
-
-		-- Navigation keymaps (registered in which-key)
-		map('n', '<leader>lnd', vim.lsp.buf.definition, 'Go to Definition')
-		map('n', '<leader>lnD', vim.lsp.buf.declaration, 'Go to Declaration')
-		map('n', '<leader>lni', vim.lsp.buf.implementation, 'Go to Implementation')
-		map('n', '<leader>lnr', vim.lsp.buf.references, 'References')
-		map('n', '<leader>lnt', vim.lsp.buf.type_definition, 'Type Definition')
-
-		-- Refactoring keymaps (registered in which-key)
-		map('n', '<leader>lrn', vim.lsp.buf.rename, 'Rename Symbol')
-		map({ 'n', 'v' }, '<leader>lra', vim.lsp.buf.code_action, 'Code Action')
-		map('n', '<leader>lrf', function()
-			vim.lsp.buf.format({ async = true })
-		end, 'Format Buffer')
-
-		-- Imports keymaps (registered in which-key)
-		map('n', '<leader>lio', function()
-			vim.lsp.buf.code_action({
-				context = {
-					only = { "source.organizeImports" }
-				},
-				apply = true
-			})
-		end, 'Organize Imports')
-
-		map('n', '<leader>liu', function()
-			vim.lsp.buf.code_action({
-				context = {
-					only = { "source.removeUnused" }
-				},
-				apply = true
-			})
-		end, 'Remove Unused Imports')
-
-		map('n', '<leader>lim', function()
-			vim.lsp.buf.code_action({
-				context = {
-					only = { "source.addMissingImports" }
-				},
-				apply = true
-			})
-		end, 'Add Missing Imports')
-
-		-- Symbols/Outline keymaps (registered in which-key)
-		map('n', '<leader>lsd', function()
-			if package.loaded['snacks'] then
-				Snacks.picker.lsp_symbols()
-			else
-				vim.lsp.buf.document_symbol()
-			end
-		end, 'Document Symbols')
-
-		map('n', '<leader>lsw', function()
-			if package.loaded['snacks'] then
-				Snacks.picker.lsp_workspace_symbols()
-			else
-				vim.lsp.buf.workspace_symbol()
-			end
-		end, 'Workspace Symbols')
-
-		-- Calls keymaps (registered in which-key)
-		map('n', '<leader>lci', function()
-			if package.loaded['snacks'] then
-				Snacks.picker.lsp_incoming_calls()
-			else
-				vim.lsp.buf.incoming_calls()
-			end
-		end, 'Incoming Calls')
-
-		map('n', '<leader>lco', function()
-			if package.loaded['snacks'] then
-				Snacks.picker.lsp_outgoing_calls()
-			else
-				vim.lsp.buf.outgoing_calls()
-			end
-		end, 'Outgoing Calls')
-
-		-- Diagnostics keymaps (registered in which-key)
-		map('n', '<leader>ldo', vim.diagnostic.open_float, 'Open Diagnostic Float')
-		map('n', '<leader>ldp', vim.diagnostic.goto_prev, 'Previous Diagnostic')
-		map('n', '<leader>ldn', vim.diagnostic.goto_next, 'Next Diagnostic')
-
-		map('n', '<leader>lda', function()
-			if package.loaded['snacks'] then
-				Snacks.picker.diagnostics()
-			else
-				vim.diagnostic.setloclist()
-			end
-		end, 'All Diagnostics')
-
-		map('n', '<leader>ldb', function()
-			if package.loaded['snacks'] then
-				Snacks.picker.diagnostics_buffer()
-			else
-				vim.diagnostic.setqflist()
-			end
-		end, 'Buffer Diagnostics')
-
-		-- Help keymaps (registered in which-key)
-		map('n', '<leader>lhh', vim.lsp.buf.hover, 'Hover Info')
-		map('n', '<leader>lhs', vim.lsp.buf.signature_help, 'Signature Help')
-	end,
-})
-
 require('nvim-tundra').setup({
   plugins = {
     telescope = true,
   },
 })
 
+-- Enhanced Dashboard with more functionality
+require('config.dashboard-config')

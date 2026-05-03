@@ -12,7 +12,7 @@ wk.setup({
 
 wk.add({
 	-- Leader mappings
-	{ "<leader>e", ":Neotree toggle<CR>", desc = "Explorer" },
+	{ "<leader>e", "<cmd>lua toggle_neotree()<CR>", desc = "Explorer" },
 	{ "<leader><space>", ":Telescope find_files<CR>", desc = "Find Files" },
 	{ "<leader>t", "<cmd>lua _toggle_terminal()<CR>", desc = "Terminal" },
 	{ "<leader>T", "<cmd>lua _close_terminal_completely()<CR>", desc = "Kill Terminal" },
