@@ -50,16 +50,21 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig.git" },
 	{ src = "https://github.com/Saghen/blink.cmp", version = "v1.6.0" },
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim" },
 	{ src = "https://github.com/echasnovski/mini.files" },
 	{ src = "https://github.com/stevearc/oil.nvim.git" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-frecency.nvim" },
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/sindrets/diffview.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"},
@@ -67,7 +72,8 @@ vim.pack.add({
 	{ src = "https://github.com/folke/which-key.nvim" },
 	{ src = "https://github.com/kdheepak/lazygit.nvim" },
 	{ src = "https://github.com/windwp/nvim-autopairs" },
-	{ src = "https://github.com/goolord/alpha-nvim"}
+	{ src = "https://github.com/goolord/alpha-nvim"},
+	{ src = "https://github.com/Mofiqul/adwaita.nvim"}
 })
 require('vim._core.ui2').enable({
     enable = true,
@@ -123,8 +129,8 @@ end
 -- Lazygit keybinding
 vim.keymap.set("n", "gg", "<Cmd>LazyGit<CR>", { noremap = true, silent = true })
 
--- Colorscheme
-vim.cmd.colorscheme "tundra"
+-- Colorscheme (now handled by theme-config)
+require("config.theme-config")
 
 -- Which-key setup
 require("config.which-key-config")
@@ -194,6 +200,9 @@ require("blink.cmp").setup({
 	fuzzy = { implementation = "prefer_rust" }
 })
 
+-- LuaSnip setup (snippet engine)
+require("config.luasnip-config")
+
 -- nvim-autopairs setup
 require("config.autopairs-config")
 
@@ -237,7 +246,7 @@ require("conform").setup({
 -- Lualine setup
 require('lualine').setup({
 	options = {
-		theme = 'tundra',
+		theme = 'auto',
 		component_separators = { left = '', right = '' },
 		section_separators = { left = '', right = '' },
 	},
@@ -391,6 +400,15 @@ require('telescope').setup({
 	}
 })
 require('telescope').load_extension('ui-select')
+
+-- Gitsigns setup (git line changes)
+require("config.gitsigns-config")
+
+-- Diffview setup (git diff viewer)
+require("config.diffview-config")
+
+-- Enhanced Telescope with extensions
+require("config.telescope-config")
 
 -- LSP Configuration (centralized in separate file)
 require('config.lsp-config')
