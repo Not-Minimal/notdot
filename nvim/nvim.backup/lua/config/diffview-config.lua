@@ -149,4 +149,3 @@ map("n", "<leader>dvh", "<Cmd>DiffviewFileHistory %<CR>", { noremap = true, sile
 map("n", "<leader>dvc", "<Cmd>DiffviewClose<CR>", { noremap = true, silent = true, desc = "Diffview close" })
 map("n", "<leader>dvt", "<Cmd>DiffviewToggleFiles<CR>", { noremap = true, silent = true, desc = "Toggle file panel" })
 map("n", "<leader>dvr", "<Cmd>DiffviewRefresh<CR>", { noremap = true, silent = true, desc = "Refresh" })
-

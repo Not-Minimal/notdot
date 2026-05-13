@@ -1,8 +1,11 @@
--- LSP Configuration for Neovim 0.12+
--- This file handles all LSP setup with optimizations for performance and UX
+local lspconfig = require("lspconfig")
+
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = { "lua_ls", "basedpyright", "rust_analyzer", "emmet_ls", "eslint", "ts_ls", "tailwindcss" },
+})
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()
-
 -- Enhanced capabilities
 capabilities = vim.tbl_deep_extend(
 	'force',
@@ -30,131 +33,87 @@ capabilities = vim.tbl_deep_extend(
 	}
 )
 
--- Enable inlay hints globally (Nvim 0.12+)
-vim.lsp.inlay_hint.enable(true)
-
--- Centralized on_attach handler
-local function on_lsp_attach(client, bufnr)
-	local map = function(mode, lhs, rhs, desc)
-		vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, noremap = true, silent = true })
-	end
-
-	-- Basic Navigation (always available)
-	map('n', 'K', vim.lsp.buf.hover, 'Hover Info')
-	map('n', '<C-k>', vim.lsp.buf.signature_help, 'Signature Help')
-
-	-- Navigation keymaps
-	map('n', '<leader>lnd', vim.lsp.buf.definition, 'Go to Definition')
-	map('n', '<leader>lnD', vim.lsp.buf.declaration, 'Go to Declaration')
-	map('n', '<leader>lni', vim.lsp.buf.implementation, 'Go to Implementation')
-	map('n', '<leader>lnr', vim.lsp.buf.references, 'References')
-	map('n', '<leader>lnt', vim.lsp.buf.type_definition, 'Type Definition')
-
-	-- Refactoring keymaps
-	map('n', '<leader>lrn', vim.lsp.buf.rename, 'Rename Symbol')
-	map({ 'n', 'v' }, '<leader>lra', vim.lsp.buf.code_action, 'Code Action')
-	map('n', '<leader>lrf', function()
-		vim.lsp.buf.format({ async = true })
-	end, 'Format Buffer')
-
-	-- Imports keymaps
-	map('n', '<leader>lio', function()
-		vim.lsp.buf.code_action({
-			context = {
-				only = { "source.organizeImports" }
-			},
-			apply = true
-		})
-	end, 'Organize Imports')
-
-	map('n', '<leader>liu', function()
-		vim.lsp.buf.code_action({
-			context = {
-				only = { "source.removeUnused" }
-			},
-			apply = true
-		})
-	end, 'Remove Unused Imports')
-
-	map('n', '<leader>lim', function()
-		vim.lsp.buf.code_action({
-			context = {
-				only = { "source.addMissingImports" }
-			},
-			apply = true
-		})
-	end, 'Add Missing Imports')
-
-	-- Symbols/Outline keymaps
-	map('n', '<leader>lsd', function()
-		if package.loaded['snacks'] then
-			Snacks.picker.lsp_symbols()
-		else
-			vim.lsp.buf.document_symbol()
-		end
-	end, 'Document Symbols')
-
-	map('n', '<leader>lsw', function()
-		if package.loaded['snacks'] then
-			Snacks.picker.lsp_workspace_symbols()
-		else
-			vim.lsp.buf.workspace_symbol()
-		end
-	end, 'Workspace Symbols')
-
-	-- Calls keymaps
-	map('n', '<leader>lci', function()
-		if package.loaded['snacks'] then
-			Snacks.picker.lsp_incoming_calls()
-		else
-			vim.lsp.buf.incoming_calls()
-		end
-	end, 'Incoming Calls')
-
-	map('n', '<leader>lco', function()
-		if package.loaded['snacks'] then
-			Snacks.picker.lsp_outgoing_calls()
-		else
-			vim.lsp.buf.outgoing_calls()
-		end
-	end, 'Outgoing Calls')
-
-	-- Diagnostics keymaps
-	map('n', '<leader>ldo', vim.diagnostic.open_float, 'Open Diagnostic Float')
-	map('n', '<leader>ldp', vim.diagnostic.goto_prev, 'Previous Diagnostic')
-	map('n', '<leader>ldn', vim.diagnostic.goto_next, 'Next Diagnostic')
-
-	map('n', '<leader>lda', function()
-		if package.loaded['snacks'] then
-			Snacks.picker.diagnostics()
-		else
-			vim.diagnostic.setloclist()
-		end
-	end, 'All Diagnostics')
-
-	map('n', '<leader>ldb', function()
-		if package.loaded['snacks'] then
-			Snacks.picker.diagnostics_buffer()
-		else
-			vim.diagnostic.setqflist()
-		end
-	end, 'Buffer Diagnostics')
-
-	-- Help keymaps
-	map('n', '<leader>lhh', vim.lsp.buf.hover, 'Hover Info')
-	map('n', '<leader>lhs', vim.lsp.buf.signature_help, 'Signature Help')
+-- Enable inlay hints safely if supported by Neovim version
+if vim.lsp.inlay_hint then
+	pcall(function() vim.lsp.inlay_hint.enable(true) end)
 end
 
--- LSP Attach autocmd - Centralizado
+-- Centralized LSP Attach handler
+local function on_lsp_attach(client, bufnr)
+	if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+		pcall(function() vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) end)
+	end
+
+	-- Keymaps for LSP actions organized by groups
+	local opts = { buffer = bufnr, silent = true }
+	
+	-- Standard fallback keys (still nice to have)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, silent = true, desc = "Go to Definition" })
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, silent = true, desc = "Hover Documentation" })
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr, silent = true, desc = "Go to References" })
+
+	-- LSP Navigation Group
+	vim.keymap.set('n', '<leader>cnd', vim.lsp.buf.definition, { buffer = bufnr, silent = true, desc = "Definition" })
+	vim.keymap.set('n', '<leader>cnD', vim.lsp.buf.declaration, { buffer = bufnr, silent = true, desc = "Declaration" })
+	vim.keymap.set('n', '<leader>cni', vim.lsp.buf.implementation, { buffer = bufnr, silent = true, desc = "Implementation" })
+	vim.keymap.set('n', '<leader>cnr', vim.lsp.buf.references, { buffer = bufnr, silent = true, desc = "References" })
+
+	-- LSP Actions Group
+	vim.keymap.set('n', '<leader>caa', vim.lsp.buf.code_action, { buffer = bufnr, silent = true, desc = "Code Action" })
+	
+	-- LSP Refactor Group
+	vim.keymap.set('n', '<leader>crr', vim.lsp.buf.rename, { buffer = bufnr, silent = true, desc = "Rename Symbol" })
+
+	-- LSP Help Group
+	vim.keymap.set('n', '<leader>chh', vim.lsp.buf.hover, { buffer = bufnr, silent = true, desc = "Hover Documentation" })
+	vim.keymap.set('n', '<leader>chs', vim.lsp.buf.signature_help, { buffer = bufnr, silent = true, desc = "Signature Help" })
+
+	-- LSP Diagnostics Group
+	vim.keymap.set('n', '<leader>cdd', vim.diagnostic.open_float, { buffer = bufnr, silent = true, desc = "Line Diagnostics" })
+	vim.keymap.set('n', '<leader>cdn', vim.diagnostic.goto_next, { buffer = bufnr, silent = true, desc = "Next Diagnostic" })
+	vim.keymap.set('n', '<leader>cdp', vim.diagnostic.goto_prev, { buffer = bufnr, silent = true, desc = "Previous Diagnostic" })
+	vim.keymap.set('n', '<leader>cdq', vim.diagnostic.setloclist, { buffer = bufnr, silent = true, desc = "Diagnostics Quickfix" })
+	
+	-- LSP Symbols Group (Handled mostly via telescope if you have it, but standard fallback)
+	vim.keymap.set('n', '<leader>css', vim.lsp.buf.document_symbol, { buffer = bufnr, silent = true, desc = "Document Symbols" })
+	vim.keymap.set('n', '<leader>csw', vim.lsp.buf.workspace_symbol, { buffer = bufnr, silent = true, desc = "Workspace Symbols" })
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		on_lsp_attach(client, args.buf)
+		if client then
+			on_lsp_attach(client, args.buf)
+		end
 	end,
 })
 
--- Configure individual language servers
--- Lua
+-- Optimized Diagnostic Configuration
+vim.diagnostic.config({
+	severity_sort = true,
+	update_in_insert = false,
+	float = {
+		border = 'rounded',
+		source = 'if_many',
+		max_width = 80,
+	},
+	underline = true,
+	virtual_text = {
+		spacing = 2,
+		source = 'if_many',
+		prefix = '●',
+	},
+	signs = true,
+})
+
+-- Configure individual language servers using the native vim.lsp.config()
+-- This is required by the newest version of mason-lspconfig for Nvim 0.12+
+
+-- Add a default config hook for all servers if you wanted, but capabilities need to be set individually
+vim.lsp.config('*', {
+	capabilities = capabilities,
+})
+
 vim.lsp.config('lua_ls', {
 	capabilities = capabilities,
 	settings = {
@@ -177,7 +136,6 @@ vim.lsp.config('lua_ls', {
 	},
 })
 
--- TypeScript / JavaScript
 vim.lsp.config('ts_ls', {
 	capabilities = capabilities,
 	settings = {
@@ -206,7 +164,6 @@ vim.lsp.config('ts_ls', {
 	},
 })
 
--- Rust
 vim.lsp.config('rust_analyzer', {
 	capabilities = capabilities,
 	settings = {
@@ -234,7 +191,6 @@ vim.lsp.config('rust_analyzer', {
 	},
 })
 
--- Python (BasedPyright)
 vim.lsp.config('basedpyright', {
 	capabilities = capabilities,
 	settings = {
@@ -247,21 +203,14 @@ vim.lsp.config('basedpyright', {
 	},
 })
 
--- Prisma
 vim.lsp.config('prisma', {
 	capabilities = capabilities,
 	cmd = { 'prisma-language-server', '--stdio' },
 	filetypes = { 'prisma' },
-	root_dir = require('lspconfig.util').root_pattern('.git', 'package.json', 'schema.prisma'),
+	-- Since root_pattern might not be globally available, we let native LSP handle it when possible or use lspconfig.util
+	root_markers = { '.git', 'package.json', 'schema.prisma' },
 })
 
--- Emmet
-vim.lsp.config('emmet_ls', {
-	capabilities = capabilities,
-	filetypes = { 'html', 'css', 'scss', 'javascriptreact', 'typescriptreact', 'php', 'heex', 'elixir' },
-})
-
--- ESLint
 vim.lsp.config('eslint', {
 	capabilities = capabilities,
 	settings = {
@@ -272,7 +221,6 @@ vim.lsp.config('eslint', {
 	},
 })
 
--- TailwindCSS
 vim.lsp.config('tailwindcss', {
 	capabilities = capabilities,
 	settings = {
@@ -285,34 +233,4 @@ vim.lsp.config('tailwindcss', {
 			},
 		},
 	},
-})
-
--- Optimized Diagnostic Configuration
-vim.diagnostic.config({
-	severity_sort = true,
-	update_in_insert = false,
-	float = {
-		border = 'rounded',
-		source = 'if_many',
-		max_width = 80,
-	},
-	underline = true,
-	virtual_text = {
-		spacing = 2,
-		source = 'if_many',
-		prefix = '●',
-	},
-	signs = true,
-})
-
--- Enable LSP servers
-vim.lsp.enable({
-	'lua_ls',
-	'ts_ls',
-	'rust_analyzer',
-	'basedpyright',
-	'prisma',
-	'emmet_ls',
-	'eslint',
-	'tailwindcss',
 })

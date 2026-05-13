@@ -21,4 +21,3 @@ vim.g.clipboard = {
 -- This makes all yank operations go directly to system clipboard
 vim.opt.clipboard = "unnamed,unnamedplus"
 
-

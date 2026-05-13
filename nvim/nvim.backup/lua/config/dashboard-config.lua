@@ -59,4 +59,3 @@ alpha.setup(dashboard.opts)
 
 -- Disable statusline when showing dashboard
 vim.cmd([[autocmd FileType alpha setlocal laststatus=0 | autocmd BufLeave <buffer> setlocal laststatus=3]])
-

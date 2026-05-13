@@ -1,4 +1,4 @@
-local autopairs = require("nvim-autopairs")
+local autopairs = require("nvim-autopairs") -- import nvim-autopairs
 
 -- setup autopairs
 autopairs.setup({

@@ -63,58 +63,38 @@ telescope.load_extension("frecency")
 -- Telescope keybindings
 local map = vim.keymap.set
 
--- Find files
+-- ==========================================
+-- File / Buffers (<leader>f)
+-- ==========================================
 map("n", "<leader>ff", builtin.find_files, { noremap = true, silent = true, desc = "Find files" })
 map("n", "<leader>fF", function()
 	builtin.find_files({ hidden = true, no_ignore = true })
 end, { noremap = true, silent = true, desc = "Find all files" })
-
--- Recent files (frecency)
 map("n", "<leader>fr", telescope.extensions.frecency.frecency, { noremap = true, silent = true, desc = "Recent files" })
+map("n", "<leader>fb", builtin.buffers, { noremap = true, silent = true, desc = "Buffers" })
 
--- Search text
-map("n", "<leader>fg", builtin.live_grep, { noremap = true, silent = true, desc = "Live grep" })
-map("n", "<leader>fG", function()
+-- ==========================================
+-- Search / Grep (<leader>s)
+-- ==========================================
+map("n", "<leader>sg", builtin.live_grep, { noremap = true, silent = true, desc = "Live grep" })
+map("n", "<leader>sG", function()
 	builtin.live_grep({ additional_args = function()
 		return { "--hidden" }
 	end })
 end, { noremap = true, silent = true, desc = "Live grep (hidden)" })
+map("n", "<leader>sw", builtin.grep_string, { noremap = true, silent = true, desc = "Grep word" })
+map("n", "<leader>sh", builtin.help_tags, { noremap = true, silent = true, desc = "Help tags" })
+map("n", "<leader>sq", builtin.quickfix, { noremap = true, silent = true, desc = "Quickfix" })
+map("n", "<leader>sd", builtin.diagnostics, { noremap = true, silent = true, desc = "Diagnostics" })
+map("n", "<leader>sm", builtin.man_pages, { noremap = true, silent = true, desc = "Man pages" })
+map("n", "<leader>sR", builtin.registers, { noremap = true, silent = true, desc = "Registers" })
+map("n", "<leader>sk", builtin.marks, { noremap = true, silent = true, desc = "Marks" })
+map("n", "<leader>sj", builtin.jumplist, { noremap = true, silent = true, desc = "Jump list" })
 
--- Search word under cursor
-map("n", "<leader>fw", builtin.grep_string, { noremap = true, silent = true, desc = "Grep word" })
+-- ==========================================
+-- Git (<leader>g)
+-- ==========================================
+map("n", "<leader>gc", builtin.git_commits, { noremap = true, silent = true, desc = "Git commits" })
+map("n", "<leader>gb", builtin.git_branches, { noremap = true, silent = true, desc = "Git branches" })
+map("n", "<leader>gs", builtin.git_status, { noremap = true, silent = true, desc = "Git status" })
 
--- Buffers
-map("n", "<leader>fb", builtin.buffers, { noremap = true, silent = true, desc = "Buffers" })
-
--- Git commands
-map("n", "<leader>fgc", builtin.git_commits, { noremap = true, silent = true, desc = "Git commits" })
-map("n", "<leader>fgb", builtin.git_branches, { noremap = true, silent = true, desc = "Git branches" })
-map("n", "<leader>fgs", builtin.git_status, { noremap = true, silent = true, desc = "Git status" })
-
--- Help
-map("n", "<leader>fh", builtin.help_tags, { noremap = true, silent = true, desc = "Help tags" })
-
--- Quickfix
-map("n", "<leader>fq", builtin.quickfix, { noremap = true, silent = true, desc = "Quickfix" })
-
--- LSP
-map("n", "<leader>fld", builtin.lsp_definitions, { noremap = true, silent = true, desc = "LSP definitions" })
-map("n", "<leader>fli", builtin.lsp_implementations, { noremap = true, silent = true, desc = "LSP implementations" })
-map("n", "<leader>flr", builtin.lsp_references, { noremap = true, silent = true, desc = "LSP references" })
-map("n", "<leader>fls", builtin.lsp_document_symbols, { noremap = true, silent = true, desc = "LSP document symbols" })
-map("n", "<leader>flw", builtin.lsp_workspace_symbols, { noremap = true, silent = true, desc = "LSP workspace symbols" })
-
--- Diagnostics
-map("n", "<leader>fde", builtin.diagnostics, { noremap = true, silent = true, desc = "Diagnostics" })
-
--- Man pages
-map("n", "<leader>fm", builtin.man_pages, { noremap = true, silent = true, desc = "Man pages" })
-
--- Registers
-map("n", "<leader>freg", builtin.registers, { noremap = true, silent = true, desc = "Registers" })
-
--- Marks
-map("n", "<leader>fmk", builtin.marks, { noremap = true, silent = true, desc = "Marks" })
-
--- Jump list
-map("n", "<leader>fjl", builtin.jumplist, { noremap = true, silent = true, desc = "Jump list" })
