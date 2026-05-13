@@ -156,23 +156,22 @@ ins_left {
   function()
     local msg = 'No Active Lsp'
     local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
-    local clients = vim.lsp.get_clients and vim.lsp.get_clients() or vim.lsp.get_clients()
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
     if next(clients) == nil then
       return msg
     end
 
-    local lsp_name = nil
+    -- Get the name of the first attached LSP
+    local lsp_names = {}
     for _, client in ipairs(clients) do
-      local filetypes = client.config.capabilities
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        lsp_name = client.name
-        break
-      end
+      table.insert(lsp_names, client.name)
     end
 
-    if not lsp_name then
+    if #lsp_names == 0 then
       return msg
     end
+
+    local lsp_name = table.concat(lsp_names, ', ')
 
     -- Fetch the correct icon based on the filetype
     local icon, _ = require('nvim-web-devicons').get_icon_by_filetype(buf_ft)
@@ -181,7 +180,7 @@ ins_left {
     end
 
     -- Fallback icon if the language has no specific icon
-    return '  ' .. lsp_name
+    return '  ' .. lsp_name
   end,
   color = { fg = '#ffffff', gui = 'bold' },
 }

@@ -60,6 +60,13 @@ local function on_lsp_attach(client, bufnr)
 
 	-- LSP Actions Group
 	vim.keymap.set('n', '<leader>caa', vim.lsp.buf.code_action, { buffer = bufnr, silent = true, desc = "Code Action" })
+	vim.keymap.set('n', '<leader>caf', function()
+		require("conform").format({
+			async = true,
+			lsp_format = "fallback",
+			timeout_ms = 2000,
+		})
+	end, { buffer = bufnr, silent = true, desc = "Format Document" })
 	
 	-- LSP Refactor Group
 	vim.keymap.set('n', '<leader>crr', vim.lsp.buf.rename, { buffer = bufnr, silent = true, desc = "Rename Symbol" })

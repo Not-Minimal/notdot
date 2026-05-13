@@ -6,6 +6,13 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 vim.g.mapleader = " "
+
+-- Add local paths to PATH for formatters installed via pipx
+local home = os.getenv("HOME") or ""
+if home ~= "" then
+	vim.env.PATH = home .. "/.local/bin:" .. vim.env.PATH
+end
+
 vim.o.number = true
 vim.opt.relativenumber = true
 vim.o.smartindent = true
@@ -36,13 +43,13 @@ vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
 vim.opt.clipboard = "unnamedplus"
 vim.keymap.set("v", "p", '"_dP') --Pegar sin perder lo que tenia copiado
-vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking (copying) text",
 
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', {clear = true}),
-    callback = function ()
-        vim.highlight.on_yank()
-    end,
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 vim.opt.undofile = true
@@ -54,11 +61,10 @@ vim.opt.undofile = true
 vim.keymap.set("n", "qq", ":split<Return>", { noremap = true, silent = true })
 vim.keymap.set("n", "sv", ":vsplit<Return>", { noremap = true, silent = true })
 -- Global keymaps (window navigation and file explorer)
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true, silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true, silent = true })
-
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
 -- ==============================================================================
 -- PLUGINS (MANAGEMENT)
@@ -70,7 +76,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-frecency.nvim" },
-	{ src = "https://github.com/Saghen/blink.cmp",                       version = "v1.6.0" },
+	{ src = "https://github.com/Saghen/blink.cmp", version = "v1.6.0" },
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
@@ -80,7 +86,7 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim.git" },
 	{ src = "https://github.com/mason-org/mason.nvim.git" },
 	{ src = "https://github.com/neovim/nvim-lspconfig.git" },
-	{ src = 'https://github.com/nvim-tree/nvim-tree.lua' },
+	{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/goolord/alpha-nvim" },
 	{ src = "https://github.com/supermaven-inc/supermaven-nvim" },
@@ -88,14 +94,11 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/rcarriga/nvim-notify" },
 	{ src = "https://github.com/folke/which-key.nvim" },
-
-			{ src = "https://github.com/folke/noice.nvim" },
+	{ src = "https://github.com/folke/noice.nvim" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
-
-  {src = "https://github.com/stevearc/aerial.nvim"},
-	{ src = "https://github.com/nvim-tree/nvim-web-devicons" }
+	{ src = "https://github.com/stevearc/aerial.nvim" },
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 })
-
 
 -- ==============================================================================
 -- UI & APPEARANCE
@@ -103,17 +106,16 @@ vim.pack.add({
 -- Colorscheme (now handled by theme-config)
 require("config.theme-config")
 
-require('vim._core.ui2').enable({
+require("vim._core.ui2").enable({
 	enable = true,
 	msg = {
 		target = "cmd", -- options: cmd(classic), msg(similar to noice)
-		pager  = { height = 1 },
-		msg    = { height = 0.5, timeout = 4500 },
+		pager = { height = 1 },
+		msg = { height = 0.5, timeout = 4500 },
 		dialog = { height = 0.5 },
-		cmd    = { height = 0.5 },
+		cmd = { height = 0.5 },
 	},
 })
-
 
 -- ==============================================================================
 -- PLUGIN CONFIGURATIONS
@@ -162,7 +164,7 @@ require("config.telescope-config")
 -- Nvim-tree setup
 require("config.nvim-tree-config")
 -- Enhanced Dashboard with more functionality
-require('config.dashboard-config')
+require("config.dashboard-config")
 -- Gitsigns setup (git line changes)
 require("config.gitsigns-config")
 -- Git DiffView Config
