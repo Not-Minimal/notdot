@@ -64,6 +64,7 @@ conform.setup({
 		rust = { "rustfmt" },
 		html = { "prettier" },
 		markdown = { "prettier" },
+		dockerfile = {}, -- Uses LSP fallback via vim.lsp
 	},
 	log_level = vim.log.levels.WARN,
 	notify_on_error = true,

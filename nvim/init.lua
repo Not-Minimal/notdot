@@ -53,6 +53,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.opt.undofile = true
+
+-- Detect Dockerfile as dockerfile filetype
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "Dockerfile*", "dockerfile*" },
+	callback = function()
+		vim.bo.filetype = "dockerfile"
+	end,
+})
+
+-- Detect docker-compose files as yaml.docker-compose filetype for docker-compose LSP
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	pattern = { "docker-compose*.yml", "docker-compose*.yaml" },
+	callback = function()
+		vim.bo.filetype = "yaml.docker-compose"
+	end,
+})
+
 -- ==============================================================================
 -- KEYMAPS
 -- ==============================================================================

@@ -241,3 +241,55 @@ vim.lsp.config('tailwindcss', {
 		},
 	},
 })
+
+vim.lsp.config('dockerls', {
+	capabilities = capabilities,
+	cmd = { 'docker-langserver', '--stdio' },
+	filetypes = { 'dockerfile' },
+	root_markers = { 'Dockerfile', '.dockerignore', 'docker-compose.yml', 'docker-compose.yaml' },
+})
+
+-- Auto-start dockerls when opening dockerfile
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'dockerfile',
+	callback = function(args)
+		vim.lsp.start({
+			name = 'dockerls',
+			cmd = { 'docker-langserver', '--stdio' },
+			root_dir = vim.fs.dirname(vim.fs.find({ 'Dockerfile', '.dockerignore', 'docker-compose.yml' }, { upward = true })[1] or vim.fn.getcwd()),
+			capabilities = capabilities,
+		}, { reuse_client = function(client, conf)
+			return client.name == conf.name
+		end })
+	end,
+})
+
+-- Docker Compose LSP Configuration
+local compose_langserver_path = '/opt/homebrew/lib/node_modules/@microsoft/compose-language-service/bin/docker-compose-langserver'
+
+-- Fallback to alternative paths if not found
+if not vim.fn.executable(compose_langserver_path) then
+	compose_langserver_path = 'docker-compose-langserver'
+end
+
+vim.lsp.config('docker_compose_ls', {
+	capabilities = capabilities,
+	cmd = { compose_langserver_path, '--stdio' },
+	filetypes = { 'yaml.docker-compose' },
+	root_markers = { 'docker-compose.yml', 'docker-compose.yaml' },
+})
+
+-- Auto-start docker-compose LSP when opening docker-compose.yml/yaml
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'yaml.docker-compose',
+	callback = function(args)
+		vim.lsp.start({
+			name = 'docker_compose_ls',
+			cmd = { compose_langserver_path, '--stdio' },
+			root_dir = vim.fs.dirname(vim.fs.find({ 'docker-compose.yml', 'docker-compose.yaml' }, { upward = true })[1] or vim.fn.getcwd()),
+			capabilities = capabilities,
+		}, { reuse_client = function(client, conf)
+			return client.name == conf.name
+		end })
+	end,
+})
