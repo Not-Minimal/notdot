@@ -66,7 +66,7 @@ local map = vim.keymap.set
 -- ==========================================
 -- File / Buffers (<leader>f)
 -- ==========================================
-map("n", "<leader>ff", builtin.find_files, { noremap = true, silent = true, desc = "Find files" })
+map("n", "<leader><leader>", builtin.find_files, { noremap = true, silent = true, desc = "Find files" })
 map("n", "<leader>fF", function()
 	builtin.find_files({ hidden = true, no_ignore = true })
 end, { noremap = true, silent = true, desc = "Find all files" })
@@ -78,9 +78,11 @@ map("n", "<leader>fb", builtin.buffers, { noremap = true, silent = true, desc = 
 -- ==========================================
 map("n", "<leader>sg", builtin.live_grep, { noremap = true, silent = true, desc = "Live grep" })
 map("n", "<leader>sG", function()
-	builtin.live_grep({ additional_args = function()
-		return { "--hidden" }
-	end })
+	builtin.live_grep({
+		additional_args = function()
+			return { "--hidden" }
+		end,
+	})
 end, { noremap = true, silent = true, desc = "Live grep (hidden)" })
 map("n", "<leader>sw", builtin.grep_string, { noremap = true, silent = true, desc = "Grep word" })
 map("n", "<leader>sh", builtin.help_tags, { noremap = true, silent = true, desc = "Help tags" })
@@ -97,4 +99,3 @@ map("n", "<leader>sj", builtin.jumplist, { noremap = true, silent = true, desc =
 map("n", "<leader>gc", builtin.git_commits, { noremap = true, silent = true, desc = "Git commits" })
 map("n", "<leader>gb", builtin.git_branches, { noremap = true, silent = true, desc = "Git branches" })
 map("n", "<leader>gs", builtin.git_status, { noremap = true, silent = true, desc = "Git status" })
-
