@@ -34,6 +34,18 @@ vim.opt.path:append({ "**" }) -- Finding files - Search down into subfolders
 vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
+vim.opt.clipboard = "unnamedplus"
+vim.keymap.set("v", "p", '"_dP') --Pegar sin perder lo que tenia copiado
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = 'Highlight when yanking (copying) text',
+
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', {clear = true}),
+    callback = function ()
+        vim.highlight.on_yank()
+    end,
+})
+
+vim.opt.undofile = true
 -- ==============================================================================
 -- KEYMAPS
 -- ==============================================================================
@@ -80,7 +92,7 @@ vim.pack.add({
 			{ src = "https://github.com/folke/noice.nvim" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
 
-
+  {src = "https://github.com/stevearc/aerial.nvim"},
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" }
 })
 
@@ -155,3 +167,4 @@ require('config.dashboard-config')
 require("config.gitsigns-config")
 -- Git DiffView Config
 require("config.diffview-config")
+require("config.aerial-config")
