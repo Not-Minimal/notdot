@@ -115,6 +115,7 @@ vim.pack.add({
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
 	{ src = "https://github.com/stevearc/aerial.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	{ src = "https://github.com/AstroNvim/astrolsp" },
 })
 
 -- ==============================================================================
@@ -142,6 +143,15 @@ require("config.blink-config")
 require("config.supermaven-config")
 require("config.conform-config")
 require("config.which-key-config")
+require("astrolsp").setup({
+	features = {
+		codelens = true,
+		inlay_hints = false,
+		inline_completion = true, -- aprovecha Neovim 0.12
+		linked_editing_range = true,
+		semantic_tokens = true,
+	},
+})
 
 -- nvim-notify setup
 require("notify").setup({

@@ -16,6 +16,10 @@
       "rev": "6c6a89d5b068b5251c8bdf0dd57bb921bcfeeb09",
       "src": "https://github.com/goolord/alpha-nvim"
     },
+    "astrolsp": {
+      "rev": "ebc1676127b3bfbd46e3e26589b104853cac3730",
+      "src": "https://github.com/AstroNvim/astrolsp"
+    },
     "ayu-vim": {
       "rev": "01faacb4cb76e8cf72ad9858c581d80876260ab3",
       "src": "https://github.com/ayu-theme/ayu-vim"
