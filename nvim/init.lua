@@ -90,9 +90,6 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 vim.pack.add({
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope-frecency.nvim" },
 	{ src = "https://github.com/Saghen/blink.cmp", version = "v1.6.0" },
 	{ src = "https://github.com/hrsh7th/nvim-cmp" },
 	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
@@ -116,6 +113,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/aerial.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/AstroNvim/astrolsp" },
+	{ src = "https://github.com/dmtrKovalenko/fff.nvim" },
 })
 
 -- ==============================================================================
@@ -186,8 +184,6 @@ require("config.autopairs-config")
 require("config.lualine-config")
 -- Mason and LSP setup
 require("config.lsp-config")
--- Telescope setup
-require("config.telescope-config")
 -- Nvim-tree setup
 require("config.nvim-tree-config")
 -- Enhanced Dashboard with more functionality
@@ -197,3 +193,4 @@ require("config.gitsigns-config")
 -- Git DiffView Config
 require("config.diffview-config")
 require("config.aerial-config")
+require("config.fff-config")
