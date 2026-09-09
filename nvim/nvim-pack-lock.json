@@ -57,6 +57,10 @@
       "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
+    "herdr-nvim": {
+      "rev": "e652ebf7b3d6713992e68a30aec588822e69fae5",
+      "src": "https://github.com/ChmaraX/herdr-nvim"
+    },
     "lazygit.nvim": {
       "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
       "src": "https://github.com/kdheepak/lazygit.nvim"

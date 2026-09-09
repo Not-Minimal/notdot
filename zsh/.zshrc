@@ -61,6 +61,20 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
+# --- fzf-tab -----------------------------------------------------------------
+# DEBE cargarse después de compinit y ANTES de cualquier plugin que envuelva
+# widgets de completado (autosuggestions, syntax-highlighting, etc.), por eso
+# va aquí y no en el bloque de plugins de la sección 3.
+[[ -f $ZSH_CUSTOM/fzf-tab/fzf-tab.plugin.zsh ]] && source $ZSH_CUSTOM/fzf-tab/fzf-tab.plugin.zsh
+
+# Preview con tus herramientas (eza/bat) al tabular, coherente con tus
+# FZF_CTRL_T_OPTS/FZF_ALT_C_OPTS de la sección 5
+zstyle ':fzf-tab:*' fzzy-match 'smart-case'
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza --tree --level=2 --icons --color=always $realpath'
+zstyle ':fzf-tab:complete:(\\|*/|)git-log:*' fzf-preview 'git log --color=always $word'
+zstyle ':fzf-tab:*' switch-group ',' '.'
+# -------------------------------------------------------------------------------
+
 # ==============================================================================
 # 3. PLUGINS (Orden estricto antibloqueos)
 # ==============================================================================
@@ -116,10 +130,10 @@ alias rg="rg --smart-case --hidden"
 # Editores y Entornos
 alias v="nvim"
 alias vim="nvim"
-alias to="tmux attach -t"
-alias tc="tmux new -s"
-alias tls="tmux ls"
-alias tconf='tmux source-file ~/.tmux.conf || echo "No tmux session activa"'
+# Herdr (reemplaza tmux) — prefix ctrl+b, igual que tenías
+alias hls="herdr session list"
+alias hat="herdr session attach"
+alias hconf="herdr server reload-config"
 alias lzd="lazydocker"
 alias lazygit='lazygit --use-config-file="/Users/minimal/Library/Application Support/lazygit/config.yml,/Users/minimal/Library/Application Support/lazygit/catppuccin-mocha-blue.yml"'
 
@@ -162,7 +176,7 @@ alias desktop="cd ~/Desktop"
 alias docs="cd ~/Documents"
 
 # ==============================================================================
-# 5. INTEGRACIÓN DE HERRAMIENTAS CLI (FZF, Atuin, Z.lua, NVM)
+# 5. INTEGRACIÓN DE HERRAMIENTAS CLI (FZF, Atuin, Zoxide, NVM, direnv)
 # ==============================================================================
 # FZF Config
 export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
@@ -190,9 +204,25 @@ node() { lazy_nvm; node "$@"; }
 npm() { lazy_nvm; npm "$@"; }
 npx() { lazy_nvm; npx "$@"; }
 
-# Directorios rápidos e historial inteligente
-[ -f /opt/homebrew/opt/z.lua/share/z.lua/z.lua ] && eval "$(lua /opt/homebrew/opt/z.lua/share/z.lua/z.lua --init zsh)"
+# Zoxide (reemplaza z.lua) — directorios inteligentes, mismo alias `z`,
+# mantenido activamente y con mejor matching. Tu historial de z.lua no se
+# migra automáticamente, pero zoxide reconstruye ranking rápido con el uso normal.
+eval "$(zoxide init zsh)"
+
 eval "$(atuin init zsh)"
+
+# direnv — carga/descarga automática de variables de entorno por carpeta
+# (.envrc). Recomendado para sacar tokens como MERCADO_PAGO_ACCESS_TOKEN
+# de este archivo global y moverlos a un .envrc por proyecto.
+eval "$(direnv hook zsh)"
 
 # Autocompletado de Ngrok
 if command -v ngrok &>/dev/null; then eval "$(ngrok completion)"; fi
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$HOME/.local/share/gem/ruby/4.0.0/bin:$PATH"
+
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<
