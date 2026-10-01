@@ -1,0 +1,121 @@
+# ==============================================================================
+# GENERAL
+# ==============================================================================
+onboarding = false
+# copy_command = "pbcopy"  -> ELIMINADA: no existe en el schema (207 keys).
+#   El copiado al portapapeles en macOS lo maneja Herdr solo; lo más cercano
+#   configurable es ui.copy_on_select (abajo).
+
+# ==============================================================================
+# TEMA
+# ==============================================================================
+[theme]
+name = "tokyo-night"
+
+# Override opcional del token de acento sobre el tema base (además de ui.accent)
+[theme.custom]
+accent = "#cba6f7"
+
+# ==============================================================================
+# UI, PANELES Y SIDEBAR
+# ==============================================================================
+[ui]
+# Antes "mouse" (no existe). La clave real es mouse_capture.
+mouse_capture = true
+
+# Acento principal de la UI (highlights, bordes, navegación)
+accent = "#cba6f7"
+
+# Gestión de paneles
+pane_borders = true
+pane_outer_borders = true
+pane_gaps = true
+pane_scrollbars = true
+# pane_active_border / pane_inactive_border / pane_dim_inactive -> ELIMINADAS:
+#   no existen en el schema. Herdr no expone dimming de panel inactivo hoy.
+
+# Barra de tabs
+tab_bar_position = "bottom"
+# tab_bar_style = "rounded" -> ELIMINADA: no existe esa clave.
+window_title = "herdr ❯ {workspace} ❯ {pane}"  # {active_pane} no es un token válido; el correcto es {pane}
+
+# tab_bar_right es un array de tablas inline, NO [[ui.tab_bar_right]].
+# Tipos soportados: zoom, hostname, datetime, text, command.
+# "workspace", "tabs" y "agent_status" no son tipos válidos, así que
+# se quitaron. tab_bar_left tampoco existe (solo hay tab_bar_right).
+tab_bar_right = [
+  { type = "hostname" },
+  { type = "datetime", format = "%H:%M" },
+]
+tab_bar_right_separator = " · "
+
+# Sidebar / agentes
+agent_panel_sort = "spaces"
+status_indicators = "symbols"
+sidebar_start_collapsed = false
+# sidebar_position -> ELIMINADA: no existe (el sidebar no tiene posición configurable).
+
+# ==============================================================================
+# NOTIFICACIONES (in-app) Y SONIDO
+# ==============================================================================
+# [notifications.agent_blocked] / [notifications.agent_done] con enabled+sound
+# no existen. El schema real separa "popup" (ui.toast) de "sonido" (ui.sound).
+[ui.toast]
+delivery = "herdr"       # off | herdr | terminal | system
+delay_seconds = 1
+
+[ui.toast.herdr]
+position = "bottom-right"
+
+[ui.sound]
+enabled = true
+# path / done_path / request_path esperan un archivo .mp3 real, no nombres
+# de sonido del sistema como "Glass" o "Tink" (eso es específico de macOS
+# y no está soportado como valor de config). Ejemplo si tenés los mp3:
+# done_path = "sounds/done.mp3"
+# request_path = "sounds/request.mp3"
+
+# ==============================================================================
+# KEYBINDINGS
+# ==============================================================================
+[keys]
+prefix = "ctrl+b"
+
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"
+zoom = "prefix+z"
+
+# Antes move_left/move_down/move_up/move_right (no existen).
+# Los nombres reales son focus_pane_*.
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Antes resize_left/down/up/right (no existen). Son resize_pane_*.
+resize_pane_left = "prefix+H"
+resize_pane_down = "prefix+J"
+resize_pane_up = "prefix+K"
+resize_pane_right = "prefix+L"
+
+# jump_next_blocked -> ELIMINADA: no existe ninguna acción equivalente
+#   en el schema actual (no hay "saltar al próximo agente bloqueado").
+
+# focus_sidebar -> la clave real es toggle_sidebar (default "prefix+b").
+# La reasignamos a "prefix+a" como pediste.
+toggle_sidebar = "prefix+a"
+
+# ==============================================================================
+# PLUGINS Y ACCIONES PERSONALIZADAS
+# ==============================================================================
+# Scratchpad flotante para Lazygit: type = "action" no existe (los tipos
+# válidos son popup, pane, shell, plugin_action). Un popup con lazygit es
+# justo el ejemplo que trae la doc oficial. prefix+g ya es el default de
+# keys.goto, así que uso prefix+alt+g como en ese mismo ejemplo.
+[[keys.command]]
+key = "prefix+alt+g"
+type = "popup"
+command = "lazygit"
+description = "Toggle floating scratchpad (lazygit)"
+width = "80%"
+height = "80%"

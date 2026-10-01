@@ -1,0 +1,149 @@
+2026-06-26T04:23:43.738038Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=11711
+2026-06-26T04:23:43.738086Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-06-26T04:23:43.965442Z  INFO herdr::client: handshake succeeded version=14 encoding=SemanticFrame
+2026-06-26T04:24:14.582973Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=11711
+2026-07-13T04:04:20.700728Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=40140
+2026-07-13T04:04:20.700918Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-07-13T04:04:20.938403Z  INFO herdr::client: handshake succeeded version=16 encoding=SemanticFrame
+2026-07-13T04:05:44.085487Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=40140
+2026-07-13T04:05:47.587955Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=41919
+2026-07-13T04:05:47.588007Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-07-13T04:05:47.668375Z  INFO herdr::client: handshake succeeded version=16 encoding=SemanticFrame
+2026-07-13T04:06:04.193529Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=41919
+2026-07-13T04:06:10.131872Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=42114
+2026-07-13T04:06:10.131920Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-07-13T04:06:10.334638Z  INFO herdr::client: handshake succeeded version=16 encoding=SemanticFrame
+2026-07-13T04:08:12.916572Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=42114
+2026-08-26T22:16:22.548683Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=23701
+2026-08-26T22:16:22.548887Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:16:22.790938Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:25:59.224552Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=32959
+2026-08-26T22:25:59.224758Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:25:59.304923Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:26:56.803862Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=32959
+2026-08-26T22:26:59.657037Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=33400
+2026-08-26T22:26:59.657075Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:26:59.889992Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:32:53.772803Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=33400
+2026-08-26T22:32:57.487241Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=36264
+2026-08-26T22:32:57.487298Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:32:57.649027Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:34:36.571086Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=37296
+2026-08-26T22:34:36.571270Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:34:36.797948Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:34:38.167840Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=36264
+2026-08-26T22:35:32.353772Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=37296
+2026-08-26T22:35:36.360623Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=37834
+2026-08-26T22:35:36.360715Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:35:36.369323Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:36:03.781763Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=37834
+2026-08-26T22:36:03.781832Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=23701
+2026-08-26T22:36:06.852501Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=38263
+2026-08-26T22:36:06.852536Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:36:07.099704Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:38:54.616931Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=38263
+2026-08-26T22:38:56.853564Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=39885
+2026-08-26T22:38:56.853605Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:38:56.901078Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:41:30.618360Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=39885
+2026-08-26T22:41:58.628353Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=41624
+2026-08-26T22:41:58.628421Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:41:58.854561Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-26T22:42:07.427200Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=41624
+2026-08-26T22:42:10.135116Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=41718
+2026-08-26T22:42:10.135160Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-26T22:42:10.183026Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-27T04:10:17.340311Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=41718
+2026-08-27T04:10:21.893865Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=65836
+2026-08-27T04:10:21.893923Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-08-27T04:10:22.143639Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-08-27T05:00:12.867908Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=65836
+2026-09-01T14:19:46.790897Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=1789
+2026-09-01T14:19:46.791441Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-01T14:19:46.794644Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-01T18:01:01.181564Z  WARN herdr::sound: sound playback failed sound=Request err=No space left on device (os error 28)
+2026-09-02T02:28:05.354289Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=1789
+2026-09-07T02:11:05.201591Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=3338
+2026-09-07T02:11:05.201825Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-07T02:11:05.413143Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-07T02:11:08.748876Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=3338
+2026-09-07T02:11:11.906933Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=3799
+2026-09-07T02:11:11.906984Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-07T02:11:11.916996Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-07T03:47:32.453603Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=3799
+2026-09-08T22:49:33.522256Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=5709
+2026-09-08T22:49:33.522452Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-08T22:49:33.733948Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-08T22:55:08.149522Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=5709
+2026-09-08T22:55:18.214376Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=6730
+2026-09-08T22:55:18.214407Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-08T22:55:18.454085Z  INFO herdr::client: handshake succeeded version=20 encoding=SemanticFrame
+2026-09-08T22:55:23.751351Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=6730
+2026-09-09T02:13:24.334846Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=59884
+2026-09-09T02:13:24.334969Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-09T02:13:24.579378Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-09T02:32:34.670429Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=59884
+2026-09-09T15:05:48.886411Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=4073
+2026-09-09T15:05:48.886639Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-09T15:05:49.135509Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-09T15:06:12.141442Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=4419
+2026-09-09T15:06:12.141486Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-09T15:06:12.333449Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-09T15:06:13.763535Z  INFO herdr::client: client terminal unavailable; detaching err=Inappropriate ioctl for device (os error 25)
+2026-09-09T15:06:13.764207Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=4073
+2026-09-10T02:56:04.126502Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=4419
+2026-09-10T02:56:45.464525Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=14859
+2026-09-10T02:56:45.464632Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-10T02:56:45.563660Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-10T02:57:03.495670Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=14859
+2026-09-10T02:57:14.867463Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=16701
+2026-09-10T02:57:14.867504Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-10T02:57:14.999064Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-10T02:58:36.101727Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=16701
+2026-09-10T02:58:43.571984Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=17498
+2026-09-10T02:58:43.572012Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-10T02:58:43.618709Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-10T04:02:49.871651Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=17498
+2026-09-10T22:06:14.169066Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=3991
+2026-09-10T22:06:14.169195Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-10T22:06:14.242947Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-10T22:14:44.608992Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=3991
+2026-09-11T00:15:28.722198Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=1240
+2026-09-11T00:15:28.722324Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-11T00:15:28.814598Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-11T03:26:52.593929Z  INFO herdr::client: client terminal unavailable; detaching err=Inappropriate ioctl for device (os error 25)
+2026-09-11T03:26:52.594813Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=1240
+2026-09-11T16:26:53.526278Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=1469
+2026-09-11T16:26:53.526409Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-11T16:26:53.612936Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-12T00:08:38.286318Z  INFO herdr::client: client terminal unavailable; detaching err=Inappropriate ioctl for device (os error 25)
+2026-09-12T00:08:38.288029Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=1469
+2026-09-12T00:08:39.961273Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=35850
+2026-09-12T00:08:39.961303Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-12T00:08:40.131725Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-12T02:43:58.726705Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=35850
+2026-09-13T02:03:44.431607Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=2428
+2026-09-13T02:03:44.431738Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-13T02:03:44.677931Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-13T05:00:52.780828Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=2428
+2026-09-14T02:08:37.194413Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=2769
+2026-09-14T02:08:37.194546Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-14T02:08:37.274414Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-14T04:06:42.491464Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=2769
+2026-09-14T21:38:26.496295Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=22859
+2026-09-14T21:38:26.496621Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-14T21:38:26.647739Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.0
+2026-09-15T04:03:46.153231Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=22859
+2026-09-20T21:30:39.449349Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=4787
+2026-09-20T21:30:39.449486Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-20T21:30:39.451470Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.1
+2026-09-21T03:10:30.237134Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=4787
+2026-09-29T16:57:14.240414Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=36377
+2026-09-29T16:57:14.240541Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-29T16:57:14.244114Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.1
+2026-09-29T17:04:39.485579Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=36377
+2026-09-29T17:05:29.396839Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="client" outcome="started" pid=40557
+2026-09-29T17:05:29.396867Z  INFO herdr::client: connecting to server path=/Users/minimal/.config/herdr/herdr-client.sock
+2026-09-29T17:05:29.398684Z  INFO herdr::client::handshake: endpoint handshake succeeded generation=1 server_version=0.9.1
+2026-09-29T23:40:55.906704Z  INFO herdr::client: client terminal unavailable; detaching err=Inappropriate ioctl for device (os error 25)
+2026-09-29T23:40:55.909321Z  INFO herdr::logging: herdr exiting event="app.shutdown" subsystem="client" outcome="completed" pid=40557

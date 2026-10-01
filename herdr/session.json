@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "workspaces": [
+    {
+      "id": "wV",
+      "custom_name": null,
+      "identity_cwd": "/Users/minimal/Developments/marketplace-tallertrack",
+      "public_pane_numbers": {
+        "1": 1,
+        "4": 4
+      },
+      "next_public_pane_number": 5,
+      "public_tab_numbers": [
+        1
+      ],
+      "next_public_tab_number": 2,
+      "tabs": [
+        {
+          "custom_name": "1 · api-busqueda",
+          "layout": {
+            "Split": {
+              "direction": "Horizontal",
+              "ratio": 0.53409094,
+              "first": {
+                "Pane": 1
+              },
+              "second": {
+                "Pane": 4
+              }
+            }
+          },
+          "panes": {
+            "1": {
+              "cwd": "/Users/minimal/Developments/marketplace-tallertrack"
+            },
+            "4": {
+              "cwd": "/Users/minimal/Developments/marketplace-tallertrack"
+            }
+          },
+          "zoomed": false,
+          "focused": 1,
+          "root_pane": 1
+        }
+      ],
+      "active_tab": 0
+    }
+  ],
+  "active": 0,
+  "selected": 0,
+  "sidebar_width": null,
+  "sidebar_section_split": null,
+  "collapsed_space_keys": []
+}
