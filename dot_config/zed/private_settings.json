@@ -7,6 +7,24 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "base_keymap": "VSCode",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "buffer_font_features": {
+    "calt": 1
+  },
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "minimap": {
+    "show": "never"
+  },
   "debugger": {
     "dock": "bottom"
   },
@@ -19,29 +37,13 @@
     },
     "play_sound_when_agent_done": true
   },
-  "minimap": {
-    "show": "never"
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
   },
-  "buffer_font_family": "Google Sans Code",
-  "buffer_font_features": {
-    "calt": 1
-  },
-  "ui_font_family": "Satoshi",
   "telemetry": {
     "diagnostics": false,
     "metrics": false
-  },
-  "vim_mode": true,
-  "base_keymap": "VSCode",
-  "ui_font_size": 15.0,
-  "buffer_font_size": 13.0,
-  "theme": {
-    "mode": "system",
-    "light": "Nightfox",
-    "dark": "Nightfox - opaque"
-  },
-  "terminal": {
-    "font_family": "MesloLGS NF"
   }
 }
-
