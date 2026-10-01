@@ -1,0 +1,24 @@
+# Paleta de colores basada en tu tema Tailwind/Shadcn OKLCH (Dark Mode)
+background = #252525
+foreground = #f9f9f9
+cursor-color = #f9f9f9
+selection-background = #444444
+selection-foreground = #f9f9f9
+
+# Colores ANSI (Mapeados desde tus variables de chart y acento)
+palette = 0=#252525
+palette = 1=#65001c
+palette = 2=#4db48a
+palette = 3=#d49e1e
+palette = 4=#0074f0
+palette = 5=#b159b9
+palette = 6=#53b6a0
+palette = 7=#f9f9f9
+palette = 8=#444444
+palette = 9=#9c4e4b
+palette = 10=#94d782
+palette = 11=#f9db6d
+palette = 12=#79a4ff
+palette = 13=#d991ff
+palette = 14=#a6e7d8
+palette = 15=#ffffff
