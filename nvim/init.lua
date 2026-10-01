@@ -114,7 +114,6 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
 	{ src = "https://github.com/AstroNvim/astrolsp" },
 	{ src = "https://github.com/dmtrKovalenko/fff.nvim" },
-	{ src = "https://github.com/ChmaraX/herdr-nvim" },
 })
 -- ==============================================================================
 -- CORE SETTINGS
