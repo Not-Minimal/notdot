@@ -1,0 +1,70 @@
+# ==============================================================================
+# 4. ALIASES Y COMANDOS PERSONALIZADOS
+# ==============================================================================
+# Navegación y Core
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias c="clear"
+alias h="history"
+alias e="exit"
+alias mkdir="mkdir -p"
+alias port="sudo lsof -i -P | grep"
+
+# Herramientas Modernas (eza, bat, fd, rg)
+alias ls="eza --icons --git"
+alias ll="eza -lah --icons --git --group-directories-first"
+alias la="lsd -la" # Mantienes lsd para variantes específicas
+alias lt="eza --tree --level=2 --icons"
+alias lta="eza --tree --level=3 --icons --git-ignore"
+alias cat="bat"
+alias f="fd"
+alias rg="rg --smart-case --hidden"
+
+# Editores y Entornos
+alias v="nvim"
+alias vim="nvim"
+alias to="tmux attach -t"
+alias tc="tmux new -s"
+alias tls="tmux ls"
+alias tconf='tmux source-file ~/.tmux.conf || echo "No tmux session activa"'
+alias lzd="lazydocker"
+alias lazygit='lazygit --use-config-file="/Users/minimal/Library/Application Support/lazygit/config.yml,/Users/minimal/Library/Application Support/lazygit/catppuccin-mocha-blue.yml"'
+
+# Desarrollo (Git / Node / DB)
+alias studio="npx prisma studio"
+alias ni="npm install"
+alias nid="npm install --save-dev"
+alias nr="npm run"
+alias dev="npm run dev"
+alias build="npm run build"
+
+alias gco="git checkout"
+alias gb="git branch"
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias grh="git reset --hard"
+alias gst="git stash"
+alias gstp="git stash pop"
+alias ga="git add ."
+alias gd="git diff"
+alias gs="git status"
+alias gc="git commit -m"
+alias gp="git push"
+alias gpo="git pull origin"
+alias gps="git push --set-upstream origin"
+
+# Globalias
+alias -g G='| grep'
+alias -g L='| less'
+alias -g J='| jq'
+alias -g NE='2> /dev/null'
+alias -g H='| head'
+alias -g T='| tail'
+alias jqp="jq -C | less -R"
+
+# Directorios Frecuentes
+alias projects="cd ~/Developments"
+alias config="cd ~/.config/"
+alias downloads="cd ~/Downloads"
+alias desktop="cd ~/Desktop"
+alias docs="cd ~/Documents"
