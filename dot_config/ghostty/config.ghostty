@@ -1,0 +1,37 @@
+# Ghostty config (gestionado por chezmoi)
+# Migrado desde ~/Library/Application Support/com.mitchellh.ghostty/config.ghostty
+
+# --- Apariencia ---
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
+window-theme = system
+font-family = font-fira-mono-nerd-font
+macos-icon = blueprint
+title = Kadev Studio
+window-padding-balance = true
+window-padding-x = 8
+window-padding-y = 6
+selection-background = #dc8a78
+selection-foreground = #eff1f5
+
+# --- Cursor ---
+cursor-color = #dc8a78
+cursor-text = #eff1f5
+cursor-style = bar
+cursor-style-blink = true
+
+# --- Animación del cursor (estela tipo Neovide) ---
+# Shaders de https://github.com/sahaj-b/ghostty-cursor-shaders (copiados en shaders/)
+# Alternativas: cursor_sweep.glsl, cursor_tail.glsl (tipo kitty)
+# Efectos de pulso al cambiar de modo en vim (combinables con una estela):
+#   ripple_cursor.glsl, sonic_boom_cursor.glsl, rectangle_boom_cursor.glsl
+# Ojo: con cursor bar, los de pulso requieren `custom-shader-animation = always`.
+custom-shader = shaders/cursor_warp.glsl
+
+# --- Quick Terminal (desplegable) ---
+quick-terminal-position = center
+quick-terminal-animation-duration = 0.2
+
+# --- Comportamiento ---
+bell-features = system,audio,border
+clipboard-read = allow
+shell-integration = fish
