@@ -27,6 +27,7 @@ brew "ripgrep"         # Búsqueda de texto en archivos a alta velocidad
 brew "fd"              # Búsqueda rápida de archivos (reemplazo de find)
 brew "tree"
 brew "btop"            # Monitor de recursos avanzado
+brew "herdr"
 
 # Plugins de Zsh (Solo los esenciales sin conflictos)
 brew "zsh-autosuggestions"
