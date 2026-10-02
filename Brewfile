@@ -5,12 +5,6 @@
 # ==============================================================================
 
 # ------------------------------------------------------------------------------
-# Taps
-# ------------------------------------------------------------------------------
-tap "homebrew/bundle"
-tap "homebrew/services"
-
-# ------------------------------------------------------------------------------
 # Terminal moderna, Shell y Navegación
 # ------------------------------------------------------------------------------
 brew "git"
@@ -47,6 +41,7 @@ brew "hadolint"        # Linter de Dockerfiles
 brew "shellcheck"      # Linter de scripts Bash/Zsh
 brew "actionlint"      # Validador de GitHub Actions workflows
 brew "entr"            # Ejecución automática al cambiar archivos
+brew "cocoapods"       # Gestor de dependencias iOS/macOS
 
 # ------------------------------------------------------------------------------
 # Gestión Universal de Runtimes y Aislamiento (Reemplazo de nvm/pyenv/etc.)
@@ -69,6 +64,7 @@ cask "raycast"
 cask "orbstack"             # Alternativa a Docker Desktop: 10x más rápida y ligera en Mac
 # cask "docker-desktop"     # Descomenta solo si prefieres Docker Desktop oficial
 cask "android-studio"
+cask "android-cli"          # CLI de Android para agentes de IA
 cask "flutter"
 cask "zed"
 cask "claude"
