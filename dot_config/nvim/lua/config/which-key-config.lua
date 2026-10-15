@@ -10,6 +10,7 @@ require("which-key").setup({
       { "<leader>f", group = "File / Find" },
       { "<leader>s", group = "Search"},
       { "<leader>g", group = "Git" },
+      { "<leader>x", group = "Diagnostics (Trouble)" },
 
       -- LSP Groups
       { "<leader>c", group = "Code (LSP)" },

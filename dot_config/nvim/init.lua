@@ -128,6 +128,9 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 	{ src = "https://github.com/windwp/nvim-ts-autotag" },
+	{ src = "https://github.com/folke/lazydev.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.nvim" },
+	{ src = "https://github.com/folke/trouble.nvim" },
 })
 
 -- ==============================================================================
@@ -197,4 +200,7 @@ require("config.gitsigns-config")
 require("config.diffview-config")
 require("config.aerial-config")
 require("config.treesitter-config")
+require("config.lazydev-config")
+require("config.mini-config")
+require("config.trouble-config")
 require("config.fff-config")

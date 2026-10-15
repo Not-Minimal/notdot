@@ -39,30 +39,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Textobjects
+-- Textobject motions (selection af/ic/etc. is handled by mini.ai in mini-config)
 require("nvim-treesitter-textobjects").setup({
-	select = { lookahead = true },
 	move = { set_jumps = true },
 })
 
-local select = require("nvim-treesitter-textobjects.select")
 local move = require("nvim-treesitter-textobjects.move")
 local map = vim.keymap.set
-
-local objects = {
-	f = { "@function", "function" },
-	c = { "@class", "class" },
-	a = { "@parameter", "parameter" },
-}
-for key, obj in pairs(objects) do
-	local capture, name = obj[1], obj[2]
-	map({ "x", "o" }, "a" .. key, function()
-		select.select_textobject(capture .. ".outer", "textobjects")
-	end, { desc = "Around " .. name })
-	map({ "x", "o" }, "i" .. key, function()
-		select.select_textobject(capture .. ".inner", "textobjects")
-	end, { desc = "Inside " .. name })
-end
 
 map({ "n", "x", "o" }, "]f", function()
 	move.goto_next_start("@function.outer", "textobjects")

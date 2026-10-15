@@ -57,6 +57,10 @@
       "rev": "e652ebf7b3d6713992e68a30aec588822e69fae5",
       "src": "https://github.com/ChmaraX/herdr-nvim"
     },
+    "lazydev.nvim": {
+      "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
+      "src": "https://github.com/folke/lazydev.nvim"
+    },
     "lazygit.nvim": {
       "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
       "src": "https://github.com/kdheepak/lazygit.nvim"
@@ -80,6 +84,10 @@
     "mini.files": {
       "rev": "e8db416c9f5dbce70f5501da28263d45c0a4df6b",
       "src": "https://github.com/echasnovski/mini.files"
+    },
+    "mini.nvim": {
+      "rev": "e3f2349a65143ff062f0b70ee9d68d8ce35c7059",
+      "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neo-tree.nvim": {
       "rev": "aa3500f7038a32ed4b0b765cd458b9c429062cac",
@@ -166,6 +174,10 @@
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
       "src": "https://github.com/akinsho/toggleterm.nvim"
+    },
+    "trouble.nvim": {
+      "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
+      "src": "https://github.com/folke/trouble.nvim"
     },
     "vim-sleuth": {
       "rev": "be69bff86754b1aa5adcbb527d7fcd1635a84080",
