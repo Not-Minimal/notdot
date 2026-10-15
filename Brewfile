@@ -44,6 +44,15 @@ brew "entr"            # Ejecución automática al cambiar archivos
 brew "cocoapods"       # Gestor de dependencias iOS/macOS
 
 # ------------------------------------------------------------------------------
+# Formateadores (usados por conform.nvim al guardar)
+# ------------------------------------------------------------------------------
+brew "stylua"          # Lua
+brew "biome"           # JS/TS/JSON/CSS
+brew "black"           # Python
+brew "isort"           # Python (orden de imports)
+brew "prettier"        # HTML/Markdown
+
+# ------------------------------------------------------------------------------
 # Gestión Universal de Runtimes y Aislamiento (Reemplazo de nvm/pyenv/etc.)
 # ------------------------------------------------------------------------------
 brew "mise"            # Orquestador único de Node, Python, Go, Rust y pnpm

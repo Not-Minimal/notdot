@@ -98,23 +98,6 @@ conform.setup({
 	},
 })
 
--- Enable format-on-save auto command
-local group = vim.api.nvim_create_augroup("conform_format", { clear = true })
-vim.api.nvim_create_autocmd("BufWritePre", {
-	group = group,
-	callback = function(args)
-		local bufnr = args.buf
-		pcall(function()
-			require("conform").format({
-				bufnr = bufnr,
-				async = false,
-				timeout_ms = 5000,
-				lsp_format = "fallback",
-			})
-		end)
-	end,
-})
-
 -- Format keybinding - with better error handling
 vim.keymap.set({ "n", "v" }, "<leader>cf", function()
 	pcall(function()
