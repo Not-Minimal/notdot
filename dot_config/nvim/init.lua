@@ -159,6 +159,7 @@ require("astrolsp").setup({
 
 -- nvim-notify setup
 require("notify").setup({
+	merge_duplicates = false,
 	render = "minimal",
 	animation = {
 		style = "slide",
