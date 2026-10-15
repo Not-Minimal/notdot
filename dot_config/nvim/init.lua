@@ -104,11 +104,8 @@ vim.pack.add({
 	{ src = "https://github.com/windwp/nvim-autopairs" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/Saghen/blink.cmp", version = "v1.6.0" },
-	{ src = "https://github.com/hrsh7th/nvim-cmp" },
-	{ src = "https://github.com/saadparwaiz1/cmp_luasnip" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/wakatime/vim-wakatime" },
-	{ src = "https://github.com/sam4llis/nvim-tundra" },
 	{ src = "https://github.com/ayu-theme/ayu-vim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim.git" },
 	{ src = "https://github.com/mason-org/mason.nvim.git" },
@@ -128,6 +125,9 @@ vim.pack.add({
 	{ src = "https://github.com/AstroNvim/astrolsp" },
 	{ src = "https://github.com/dmtrKovalenko/fff.nvim" },
 	{ src = "https://github.com/ChmaraX/herdr-nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+	{ src = "https://github.com/windwp/nvim-ts-autotag" },
 })
 
 -- ==============================================================================
@@ -135,17 +135,6 @@ vim.pack.add({
 -- ==============================================================================
 -- Colorscheme (now handled by theme-config)
 require("config.theme-config")
-
-require("vim._core.ui2").enable({
-	enable = true,
-	msg = {
-		target = "cmd", -- options: cmd(classic), msg(similar to noice)
-		pager = { height = 1 },
-		msg = { height = 0.5, timeout = 4500 },
-		dialog = { height = 0.5 },
-		cmd = { height = 0.5 },
-	},
-})
 
 -- ==============================================================================
 -- PLUGIN CONFIGURATIONS
@@ -207,4 +196,5 @@ require("config.gitsigns-config")
 -- Git DiffView Config
 require("config.diffview-config")
 require("config.aerial-config")
+require("config.treesitter-config")
 require("config.fff-config")

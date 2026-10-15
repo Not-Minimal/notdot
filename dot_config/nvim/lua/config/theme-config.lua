@@ -1,5 +1,5 @@
 -- Theme & Color Scheme Configuration
--- Simple theme setup using tundra colorscheme
+-- Simple theme setup using ayu colorscheme
 
 -- Set colorscheme to ayu
 vim.g.ayucolor = "dark"
