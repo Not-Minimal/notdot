@@ -25,14 +25,14 @@ dashboard.section.header.opts.hl = "Comment"
 -- Create buttons with useful actions
 local buttons = {
 	dashboard.button("n", "   New File", "<cmd>enew<CR>"),
-	dashboard.button("f", "   Find File", "<cmd>Telescope find_files<CR>"),
-	dashboard.button("r", "   Recent Files", "<cmd>Telescope oldfiles<CR>"),
-	dashboard.button("g", "   Live Grep", "<cmd>Telescope live_grep<CR>"),
-	dashboard.button("b", "   Buffers", "<cmd>Telescope buffers<CR>"),
-	dashboard.button("h", "   Help Tags", "<cmd>Telescope help_tags<CR>"),
-	dashboard.button("c", "   Config", "<cmd>Telescope find_files cwd=" .. vim.fn.stdpath("config") .. "<CR>"),
+	dashboard.button("f", "   Find File", "<cmd>lua require('fff').find_files()<CR>"),
+	dashboard.button("r", "   Recent Files", "<cmd>lua require('config.fff-config').recent()<CR>"),
+	dashboard.button("g", "   Live Grep", "<cmd>lua require('fff').live_grep()<CR>"),
+	dashboard.button("b", "   Buffers", "<cmd>lua require('config.fff-config').buffers()<CR>"),
+	dashboard.button("h", "   Help Tags", "<cmd>lua require('config.fff-config').help()<CR>"),
+	dashboard.button("c", "   Config", "<cmd>lua require('fff').find_files_in_dir(vim.fn.stdpath('config'))<CR>"),
 	dashboard.button("l", "   LSP Info", "<cmd>LspInfo<CR>"),
-	dashboard.button("m", "   Lazy Loading", "<cmd>Lazy<CR>"),
+	dashboard.button("m", "   Update Plugins", "<cmd>lua vim.pack.update()<CR>"),
 	dashboard.button("t", "   Restore Session", "<cmd>source ~/.config/nvim/session.vim<CR>"),
 	dashboard.button("q", "   Quit Neovim", "<cmd>qa<CR>"),
 }

@@ -2,18 +2,7 @@
 -- Ultra-fast file finder and live grep with frecency ranking
 -- Replaces Telescope completely
 
--- Auto-build binary on install/update
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function(ev)
-		local name, kind = ev.data.spec.name, ev.data.kind
-		if name == "fff.nvim" and (kind == "install" or kind == "update") then
-			if not ev.data.active then
-				vim.cmd.packadd("fff.nvim")
-			end
-			require("fff.download").download_or_build_binary()
-		end
-	end,
-})
+-- Binary build hook (PackChanged) lives in init.lua, before vim.pack.add
 
 -- FFF setup
 require("fff").setup({
@@ -196,3 +185,31 @@ map("n", "<leader>gc", "<Cmd>DiffviewFileHistory<CR>", { desc = "Git commits (di
 map("n", "<leader>fs", function()
 	require("fff").scan_files()
 end, { desc = "FFF rescan" })
+
+-- Recent files (replacing Telescope oldfiles)
+local function recent_files()
+	local items = {}
+	for _, file in ipairs(vim.v.oldfiles) do
+		if vim.fn.filereadable(file) == 1 then
+			table.insert(items, file)
+		end
+	end
+	vim.ui.select(items, {
+		prompt = "Recent files",
+		format_item = function(item)
+			return vim.fn.fnamemodify(item, ":~")
+		end,
+	}, function(choice)
+		if choice then
+			vim.cmd.edit(vim.fn.fnameescape(choice))
+		end
+	end)
+end
+map("n", "<leader>fr", recent_files, { desc = "Recent files" })
+
+-- Expose pickers for the dashboard
+return {
+	buffers = buffer_picker,
+	help = help_search,
+	recent = recent_files,
+}
