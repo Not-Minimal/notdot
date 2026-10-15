@@ -1,19 +1,23 @@
 # 🎯 Neovim Cheat Sheet - Guía Completa
 
+> El leader es `<Space>`. Presiona `<Space>` y espera: which-key muestra todos los grupos.
+
 ## 📋 Índice
-- [Navegación](#navegación)
-- [Edición](#edición)
-- [Búsqueda y Reemplazo](#búsqueda-y-reemplazo)
-- [Ventanas](#ventanas)
-- [Archivos y Explorador](#archivos-y-explorador)
-- [Git](#git)
-- [LSP (Language Server)](#lsp-language-server)
-- [Snippets](#snippets)
-- [Telescope](#telescope)
-- [Terminal](#terminal)
-- [Dashboard](#dashboard)
-- [Clipboard](#clipboard)
-- [Tema](#tema)
+- [Navegación](#-navegación)
+- [Edición](#️-edición)
+- [Textobjects y Surround](#-textobjects-y-surround)
+- [Búsqueda y Reemplazo](#-búsqueda-y-reemplazo)
+- [Buscar Archivos y Texto (fff)](#-buscar-archivos-y-texto-fff)
+- [Ventanas](#-ventanas)
+- [Explorador de Archivos](#-explorador-de-archivos)
+- [Git](#-git)
+- [LSP](#-lsp)
+- [Diagnósticos](#-diagnósticos)
+- [Autocompletado e IA](#-autocompletado-e-ia)
+- [Formato](#-formato)
+- [Dashboard](#-dashboard)
+- [Clipboard](#-clipboard-macos)
+- [Plugins](#-plugins)
 
 ---
 
@@ -23,28 +27,30 @@
 | Comando | Descripción |
 |---------|-------------|
 | `h`, `j`, `k`, `l` | Mover izquierda, abajo, arriba, derecha |
-| `w` | Saltar a inicio de siguiente palabra |
-| `b` | Saltar a inicio de palabra anterior |
-| `e` | Saltar a final de palabra actual |
-| `0` | Ir al inicio de línea |
-| `$` | Ir al final de línea |
-| `gg` | Ir al inicio del archivo |
-| `G` | Ir al final del archivo |
-| `Ctrl+f` | Avanzar una pantalla |
-| `Ctrl+b` | Retroceder una pantalla |
-| `Ctrl+d` | Avanzar media pantalla |
-| `Ctrl+u` | Retroceder media pantalla |
-| `{` | Saltar al párrafo anterior |
-| `}` | Saltar al párrafo siguiente |
-| `%` | Ir al paréntesis/bracket matching |
+| `w` / `b` / `e` | Siguiente palabra / anterior / final de palabra |
+| `0` / `$` | Inicio / final de línea |
+| `gg` / `G` | Inicio / final del archivo |
+| `Ctrl+d` / `Ctrl+u` | Media pantalla abajo / arriba |
+| `Ctrl+f` / `Ctrl+b` | Pantalla completa abajo / arriba |
+| `{` / `}` | Párrafo anterior / siguiente |
+| `%` | Paréntesis/bracket correspondiente |
+
+### Saltos con Treesitter
+| Comando | Descripción |
+|---------|-------------|
+| `]f` / `[f` | Función siguiente / anterior |
+| `]k` / `[k` | Clase siguiente / anterior |
+| `]d` / `[d` | Diagnóstico siguiente / anterior |
+| `]q` / `[q` | Item siguiente / anterior del quickfix |
+| `]b` / `[b` | Buffer siguiente / anterior |
 
 ### Saltos Rápidos
 | Comando | Descripción |
 |---------|-------------|
 | `:[línea]` | Ir a línea específica (ej: `:42`) |
-| `Ctrl+g` | Mostrar posición actual |
 | `m[a-z]` | Marcar posición con letra |
 | `'[a-z]` | Saltar a marca |
+| `Ctrl+o` / `Ctrl+i` | Volver / avanzar en el jump list |
 
 ---
 
@@ -53,591 +59,376 @@
 ### Modos
 | Comando | Descripción |
 |---------|-------------|
-| `i` | Insertar antes del cursor |
-| `I` | Insertar al inicio de línea |
-| `a` | Insertar después del cursor |
-| `A` | Insertar al final de línea |
-| `o` | Nueva línea abajo e insertar |
-| `O` | Nueva línea arriba e insertar |
-| `Esc` o `jk` | Volver a modo normal |
+| `i` / `a` | Insertar antes / después del cursor |
+| `I` / `A` | Insertar al inicio / final de línea |
+| `o` / `O` | Nueva línea abajo / arriba |
+| `Esc` | Volver a modo normal |
 
-### Eliminar y Copiar
+### Eliminar, Cambiar y Copiar
 | Comando | Descripción |
 |---------|-------------|
-| `x` | Eliminar carácter actual |
-| `d[movimiento]` | Eliminar (ej: `dw` = palabra, `dd` = línea) |
-| `dd` | Eliminar línea completa |
-| `D` | Eliminar desde cursor al final de línea |
-| `c[movimiento]` | Cambiar (borrar e insertar) |
-| `cc` | Cambiar línea completa |
-| `C` | Cambiar desde cursor al final de línea |
-| `y[movimiento]` | Copiar/yank (ej: `yw` = palabra, `yy` = línea) |
-| `yy` | Copiar línea completa |
-| `p` | Pegar después del cursor |
-| `P` | Pegar antes del cursor |
-
-### Indentación
-| Comando | Descripción |
-|---------|-------------|
-| `>` | Aumentar indentación |
-| `<` | Disminuir indentación |
-| `>>` | Indentación + para línea |
-| `<<` | Indentación - para línea |
-| `=` | Auto-indentar |
+| `x` | Eliminar carácter |
+| `d[movimiento]` / `dd` / `D` | Eliminar / línea / hasta final de línea |
+| `c[movimiento]` / `cc` / `C` | Cambiar / línea / hasta final de línea |
+| `y[movimiento]` / `yy` | Copiar / línea |
+| `p` / `P` | Pegar después / antes |
+| `p` (en visual) | Pegar sin perder lo copiado |
 
 ### Otros
 | Comando | Descripción |
 |---------|-------------|
-| `~` | Toggle mayúsculas/minúsculas |
-| `u` | Deshacer (undo) |
-| `Ctrl+r` | Rehacer (redo) |
-| `.` | Repetir último comando |
-| `J` | Unir línea actual con siguiente |
+| `u` / `Ctrl+r` | Deshacer / rehacer (persistente entre sesiones) |
+| `.` | Repetir último cambio |
+| `J` | Unir línea con la siguiente |
+| `>>` / `<<` / `=` | Indentar / desindentar / auto-indentar |
+| `gcc` / `gc[movimiento]` | Comentar línea / movimiento |
+| `]<Space>` / `[<Space>` | Línea vacía abajo / arriba |
+
+---
+
+## 🧩 Textobjects y Surround
+
+Se combinan con `d`, `c`, `y`, `v`: `a` = incluye todo (around), `i` = solo el interior (inside).
+
+### Textobjects (mini.ai + treesitter)
+| Objeto | Descripción | Ejemplo |
+|--------|-------------|---------|
+| `f` | Función (treesitter) | `daf` borra la función, `vif` selecciona su cuerpo |
+| `c` | Clase (treesitter) | `yac` copia la clase |
+| `o` | Bloque, if o loop (treesitter) | `cio` cambia el contenido del if |
+| `a` | Argumento | `dia` borra el argumento actual |
+| `q` | Cualquier comilla | `ciq` cambia el texto entre comillas |
+| `b` | Cualquier paréntesis/corchete/llave | `dab` borra con los paréntesis |
+| `t` | Tag HTML/JSX | `cit` cambia el contenido del tag |
+| `"`, `'`, `(`, `[`, `{` | El carácter indicado | `vi(` |
+
+Modificadores: `n` = siguiente, `l` = anterior. Ejemplos: `canf` cambia la **siguiente** función, `dilq` borra dentro de las comillas **anteriores**.
+También funcionan si el cursor no está dentro: `ci"` busca las comillas más cercanas en la línea.
+
+### Surround (mini.surround)
+| Comando | Descripción |
+|---------|-------------|
+| `sa[movimiento][car]` | Agregar: `saiw"` rodea la palabra con comillas |
+| `sd[car]` | Borrar: `sd"` quita las comillas |
+| `sr[viejo][nuevo]` | Reemplazar: `sr"'` cambia `"` por `'` |
+| `sf` / `sF` | Buscar el surround a la derecha / izquierda |
+| `sh` | Resaltar el surround |
+| `sa` (en visual) | Rodear la selección |
+
+Con `t` como carácter se trabaja con tags: `saiwt` pide el nombre del tag.
+
+### Tags HTML/JSX (nvim-ts-autotag)
+Al escribir `<div>` se cierra solo con `</div>`; al renombrar la etiqueta de apertura se renombra la de cierre.
 
 ---
 
 ## 🔎 Búsqueda y Reemplazo
 
-### Búsqueda
 | Comando | Descripción |
 |---------|-------------|
-| `/patrón` | Buscar hacia adelante |
-| `?patrón` | Buscar hacia atrás |
-| `n` | Siguiente resultado |
-| `N` | Resultado anterior |
-| `*` | Buscar palabra bajo cursor |
-| `#` | Buscar palabra anterior bajo cursor |
-
-### Reemplazo
-| Comando | Descripción |
-|---------|-------------|
-| `:s/viejo/nuevo` | Reemplazar en línea actual |
-| `:s/viejo/nuevo/g` | Reemplazar todas en línea |
-| `:%s/viejo/nuevo/g` | Reemplazar en todo archivo |
+| `/patrón` / `?patrón` | Buscar adelante / atrás |
+| `n` / `N` | Resultado siguiente / anterior |
+| `*` / `#` | Buscar palabra bajo el cursor adelante / atrás |
+| `:%s/viejo/nuevo/g` | Reemplazar en todo el archivo |
 | `:%s/viejo/nuevo/gc` | Reemplazar con confirmación |
 | `:1,10s/viejo/nuevo/g` | Reemplazar en rango |
 
 ---
 
-## 🪟 Ventanas
+## ⚡ Buscar Archivos y Texto (fff)
 
-### Navegación entre Ventanas
+### Archivos
 | Comando | Descripción |
 |---------|-------------|
-| `Ctrl+h` | Ventana izquierda |
-| `Ctrl+j` | Ventana abajo |
-| `Ctrl+k` | Ventana arriba |
-| `Ctrl+l` | Ventana derecha |
-| `Ctrl+w` `w` | Siguiente ventana |
-| `Ctrl+w` `p` | Ventana anterior |
+| `<Space><Space>` | Buscar archivos (con frecency) |
+| `<leader>fr` | Archivos recientes |
+| `<leader>fb` | Buffers abiertos |
+| `<leader>fs` | Re-escanear archivos |
 
-### Crear y Cerrar Ventanas
+### Texto
 | Comando | Descripción |
 |---------|-------------|
-| `qq` | Split horizontal (dividir arriba/abajo) |
-| `sv` | Split vertical (dividir izq/der) |
-| `Ctrl+w` `q` | Cerrar ventana actual |
-| `Ctrl+w` `o` | Cerrar todas las demás ventanas |
-| `Ctrl+w` `c` | Cerrar buffer actual |
+| `<leader>sg` | Live grep |
+| `<leader>sw` | Grep de la palabra bajo el cursor |
 
-### Ajustar Tamaño
+### Otros (`<leader>s`)
 | Comando | Descripción |
 |---------|-------------|
-| `Ctrl+w` `+` | Aumentar altura |
-| `Ctrl+w` `-` | Disminuir altura |
-| `Ctrl+w` `>` | Aumentar ancho |
-| `Ctrl+w` `<` | Disminuir ancho |
-| `Ctrl+w` `=` | Igualar tamaños |
+| `<leader>sh` | Buscar en la ayuda |
+| `<leader>sm` | Man pages |
+| `<leader>sd` | Diagnósticos (location list) |
+| `<leader>sq` | Quickfix |
+| `<leader>sR` | Registers |
+| `<leader>sk` | Marks |
+| `<leader>sj` | Jump list |
 
 ---
 
-## 📁 Archivos y Explorador
+## 🪟 Ventanas
 
-### Neo-tree (Explorador de Archivos)
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>e` | Abre/cierra Neo-tree |
-| `Esc` | Cierra Neo-tree |
-| `q` | Cierra Neo-tree |
-| `<space>` | Toggle carpeta |
-| `<cr>` / `o` | Abrir archivo |
-| `t` | Abrir en nueva pestaña |
-| `w` | Abrir en split |
-| `d` | Eliminar archivo |
-| `r` | Renombrar archivo |
-| `y` | Copiar archivo |
-| `x` | Cortar archivo |
-| `p` | Pegar archivo |
-| `c` | Crear archivo |
-| `m` | Crear carpeta |
+| `Ctrl+h/j/k/l` | Ir a la ventana izquierda / abajo / arriba / derecha |
+| `qq` | Split horizontal |
+| `sv` | Split vertical |
+| `Ctrl+w` `q` | Cerrar ventana |
+| `Ctrl+w` `o` | Cerrar las demás ventanas |
+| `Ctrl+w` `=` | Igualar tamaños |
+| `Ctrl+w` `+` / `-` / `>` / `<` | Ajustar alto / ancho |
 
-### Operaciones de Archivos
+---
+
+## 📁 Explorador de Archivos
+
+### nvim-tree
 | Comando | Descripción |
 |---------|-------------|
-| `:w` | Guardar archivo |
-| `:w!` | Guardar forzadamente |
-| `:wq` | Guardar y salir |
-| `:q` | Salir |
-| `:q!` | Salir sin guardar |
+| `<leader>e` | Abrir / cerrar el explorador |
+| `<CR>` / `o` | Abrir archivo o carpeta |
+| `Ctrl+v` / `Ctrl+x` | Abrir en split vertical / horizontal |
+| `a` | Crear archivo (termina en `/` para carpeta) |
+| `d` | Eliminar |
+| `r` | Renombrar |
+| `x` / `c` / `p` | Cortar / copiar / pegar |
+| `y` / `Y` / `gy` | Copiar nombre / ruta relativa / ruta absoluta |
+| `H` | Mostrar / ocultar archivos ocultos |
+| `R` | Refrescar |
+| `Ctrl+t` | Subir al directorio padre |
+| `?` | Ayuda con todos los atajos |
+| `q` | Cerrar |
+
+### Archivos
+| Comando | Descripción |
+|---------|-------------|
+| `:w` / `:wq` / `:q!` | Guardar / guardar y salir / salir sin guardar |
 | `:e archivo` | Abrir archivo |
-| `:e.` | Abrir explorador |
-| `:!mkdir dir` | Ejecutar comando shell |
+| `gx` | Abrir URL o ruta bajo el cursor |
 
 ---
 
 ## 🌿 Git
 
-### Gitsigns (Cambios de Línea)
+### Gitsigns (cambios por línea)
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>gn` | Siguiente hunk (cambio) |
-| `<leader>gp` | Hunk anterior |
-| `<leader>gs` | Stage hunk (guardar cambio) |
-| `<leader>gu` | Deshacer stage hunk |
-| `<leader>gr` | Reset hunk (descartar cambio) |
-| `<leader>gb` | Git blame (quién hizo el cambio) |
-| `<leader>gB` | Git blame completo |
-| `<leader>gd` | Diff del hunk |
-| `<leader>gD` | Diff HEAD~ |
-| `<leader>ghp` | Preview hunk |
-| `<leader>gtd` | Toggle deleted |
-| `<leader>gtb` | Toggle line blame |
-| `<leader>gts` | Toggle signs |
+| `<leader>gn` / `<leader>gp` | Hunk siguiente / anterior |
+| `<leader>gs` / `<leader>gr` | Stage / reset del hunk (también en visual) |
+| `<leader>gu` | Deshacer stage del hunk |
+| `<leader>gS` / `<leader>gR` | Stage / reset del buffer completo |
+| `<leader>ghp` / `<leader>ghl` | Preview del hunk / preview inline |
+| `<leader>gb` / `<leader>gB` | Blame de la línea / blame completo |
+| `<leader>gd` / `<leader>gD` | Diff del archivo / diff contra HEAD~ |
+| `<leader>gtb` | Toggle blame de línea |
+| `<leader>gtd` | Toggle líneas borradas |
+| `<leader>gts` / `<leader>gtn` | Toggle signos / resaltado de números |
 
-### Seleccionar Múltiples Líneas
+### Diffview
 | Comando | Descripción |
 |---------|-------------|
-| `v` | Modo visual (seleccionar) |
-| `V` | Modo visual línea |
-| `Ctrl+v` | Modo visual bloque |
-| `<leader>gs` | Stage selección |
-| `<leader>gr` | Reset selección |
-
-### Stage Completo Buffer
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>gS` | Stage buffer completo |
-| `<leader>gR` | Reset buffer completo |
-
-### Diffview (Ver Cambios)
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>dvo` | Abrir Diffview |
-| `<leader>dvf` | Ver file history |
-| `<leader>dvh` | Ver buffer history |
-| `<leader>dvc` | Cerrar Diffview |
-| `<leader>dvt` | Toggle file panel |
-
-### LazyGit (Interfaz Git Completa)
-| Comando | Descripción |
-|---------|-------------|
-| `gg` | Abrir LazyGit |
-
-> **Dentro de LazyGit:** Usa `?` para ver todos los keybindings disponibles
+| `<leader>dvo` / `<leader>dvc` | Abrir / cerrar Diffview |
+| `<leader>dvf` | Historial de archivos |
+| `<leader>dvh` | Historial del buffer |
+| `<leader>dvt` | Toggle panel de archivos |
+| `<leader>dvr` | Refrescar |
+| `<leader>gc` | Historial de commits |
 
 ---
 
-## 🤖 LSP (Language Server)
+## 🤖 LSP
 
-### Hover y Ayuda
+Estos atajos están disponibles cuando hay un servidor LSP activo en el buffer.
+
+### Rápidos
 | Comando | Descripción |
 |---------|-------------|
-| `K` | Mostrar documentación hover |
-| `Ctrl+k` | Signature help (parámetros función) |
+| `K` | Documentación (hover) |
+| `gd` | Ir a definición |
+| `gr` | Referencias |
+| `Ctrl+s` (insert) | Ayuda de firma (parámetros) |
+| `grn` / `gra` / `gri` / `grt` | Rename / code action / implementación / tipo (nativos de Neovim) |
+| `gO` | Símbolos del documento |
 
-### Navegación
+### Grupo `<leader>c`
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>lnd` | Go to definition |
-| `<leader>lnD` | Go to declaration |
-| `<leader>lni` | Go to implementation |
-| `<leader>lnr` | Find references |
-| `<leader>lnt` | Go to type definition |
+| `<leader>cnd` / `<leader>cnD` | Definición / declaración |
+| `<leader>cni` / `<leader>cnr` | Implementación / referencias |
+| `<leader>caa` | Code actions |
+| `<leader>caf` | Formatear documento (LSP) |
+| `<leader>crr` | Renombrar símbolo |
+| `<leader>chh` / `<leader>chs` | Hover / ayuda de firma |
+| `<leader>cdd` | Diagnóstico de la línea |
+| `<leader>cdn` / `<leader>cdp` | Diagnóstico siguiente / anterior |
+| `<leader>cdq` | Diagnósticos a location list |
+| `<leader>css` / `<leader>csw` | Símbolos del documento / workspace |
 
-### Refactoring
+### Comandos
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>lrn` | Rename símbolo |
-| `<leader>lra` | Code actions |
-| `<leader>lrf` | Format buffer |
-| `<leader>lio` | Organize imports |
-| `<leader>lim` | Add missing imports |
-
-### Símbolos
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>lsd` | Document symbols |
-| `<leader>lsw` | Workspace symbols |
-
-### Llamadas (Calls)
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>lci` | Incoming calls |
-| `<leader>lco` | Outgoing calls |
-
-### Diagnósticos
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>ldo` | Open diagnostics |
-| `<leader>ldp` | Previous diagnostic |
-| `<leader>ldn` | Next diagnostic |
-| `<leader>lda` | All diagnostics |
-| `<leader>ldb` | Buffer diagnostics |
+| `:LspInfo` | Estado de los servidores (`:checkhealth vim.lsp`) |
+| `:Mason` | Instalar / actualizar servidores |
 
 ---
 
-## 🧩 Snippets
+## 🐛 Diagnósticos
 
-### Insertar Snippets
+### Trouble (`<leader>x`)
 | Comando | Descripción |
 |---------|-------------|
-| Escribe trigger + `Tab` | Expande snippet (ej: `rfc` + Tab) |
+| `<leader>xx` | Diagnósticos del proyecto |
+| `<leader>xb` | Diagnósticos del buffer |
+| `<leader>xs` | Símbolos |
+| `<leader>xr` | Definiciones y referencias (LSP) |
+| `<leader>xq` | Quickfix |
+| `<leader>xl` | Location list |
 
-### Navegar dentro de Snippet
+### Nativos
 | Comando | Descripción |
 |---------|-------------|
-| `Ctrl+k` | Ir a siguiente placeholder |
-| `Ctrl+j` | Ir a placeholder anterior |
-| `Ctrl+l` | Siguiente choice |
-| `Ctrl+h` | Choice anterior |
-
-### Snippets Disponibles
-
-#### TypeScript/JavaScript/React
-| Trigger | Descripción |
-|---------|-------------|
-| `rfc` | React Functional Component |
-| `use` | useState hook |
-| `uef` | useEffect hook |
-| `asf` | async function |
-| `af` | arrow function |
-
-#### Python
-| Trigger | Descripción |
-|---------|-------------|
-| `def` | Function definition |
-| `cls` | Class definition |
-| `for` | For loop |
-| `if` | If statement |
-| `try` | Try except block |
-
-#### Lua
-| Trigger | Descripción |
-|---------|-------------|
-| `fn` | Function |
-| `lfn` | Local function |
-| `tbl` | Table |
+| `]d` / `[d` | Diagnóstico siguiente / anterior |
+| `]D` / `[D` | Último / primer diagnóstico |
+| `Ctrl+w` `d` | Ver diagnóstico bajo el cursor |
 
 ---
 
-## 🔍 Telescope (Búsqueda Avanzada)
+## 💡 Autocompletado e IA
 
-### Archivos
+### blink.cmp
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>ff` | Find files |
-| `<leader>fF` | Find all files (incluye hidden) |
-| `<leader>fr` | Recent files (frecency) |
-| `<leader>fb` | Buffers abiertos |
+| `Tab` / `Shift+Tab` | Siguiente / anterior sugerencia |
+| `↓` / `↑` | Siguiente / anterior sugerencia |
+| `Enter` | Aceptar (agrega paréntesis en funciones) |
 
-### Búsqueda de Texto
+Fuentes: LSP, rutas, snippets del LSP, buffer y, en archivos Lua, la API de Neovim (lazydev).
+
+### Supermaven (IA)
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>fg` | Live grep (buscar en archivos) |
-| `<leader>fG` | Live grep (incluye hidden) |
-| `<leader>fw` | Grep palabra bajo cursor |
-
-### Git
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>fgc` | Git commits |
-| `<leader>fgb` | Git branches |
-| `<leader>fgs` | Git status |
-
-### LSP
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>fld` | LSP definitions |
-| `<leader>fli` | LSP implementations |
-| `<leader>flr` | LSP references |
-| `<leader>fls` | LSP document symbols |
-| `<leader>flw` | LSP workspace symbols |
-
-### Otros
-| Comando | Descripción |
-|---------|-------------|
-| `<leader>fh` | Help tags |
-| `<leader>fq` | Quickfix |
-| `<leader>fde` | Diagnostics |
-| `<leader>fm` | Man pages |
-| `<leader>freg` | Registers |
-| `<leader>fmk` | Marks |
-| `<leader>fjl` | Jump list |
-
-### Dentro de Telescope
-| Comando | Descripción |
-|---------|-------------|
-| `Esc` / `Ctrl+c` | Cerrar |
-| `Ctrl+j` | Siguiente item |
-| `Ctrl+k` | Item anterior |
-| `<cr>` | Seleccionar item |
-| `Tab` | Multi-select |
+| `Tab` | Aceptar sugerencia completa |
+| `Ctrl+j` | Aceptar una palabra |
+| `Ctrl+]` | Descartar sugerencia |
 
 ---
 
-## 💻 Terminal
+## 🧹 Formato
 
-### Toggle Terminal
+Se formatea automáticamente al guardar con conform.nvim.
+
+| Lenguaje | Formateador |
+|----------|-------------|
+| Lua | stylua |
+| JS / TS / JSON / CSS | biome |
+| Python | isort + black |
+| HTML / Markdown | prettier |
+| Rust | rustfmt |
+| Resto | LSP (si lo soporta) |
+
 | Comando | Descripción |
 |---------|-------------|
-| `Ctrl+\` | Toggle floating terminal |
-| `<leader>t` | Toggle terminal |
-| `<leader>T` | Cerrar terminal completamente |
-
-### Dentro de la Terminal
-| Comando | Descripción |
-|---------|-------------|
-| `Esc` / `jk` | Salir a modo normal |
-| `Ctrl+h/j/k/l` | Navegar entre ventanas |
+| `<leader>cf` | Formatear archivo o selección |
+| `:ConformInfo` | Ver qué formateadores aplican y si están instalados |
 
 ---
 
 ## 📊 Dashboard
 
-Al abrir Neovim sin archivos, verás el dashboard con estos shortcuts:
+Al abrir Neovim sin archivos:
 
 | Tecla | Descripción |
 |-------|-------------|
-| `n` | New File |
-| `f` | Find File |
-| `r` | Recent Files |
-| `g` | Live Grep |
+| `n` | Nuevo archivo |
+| `f` | Buscar archivos |
+| `r` | Archivos recientes |
+| `g` | Live grep |
 | `b` | Buffers |
-| `h` | Help Tags |
-| `c` | Config |
-| `l` | LSP Info |
-| `m` | Lazy Manager |
-| `t` | Restore Session |
-| `q` | Quit |
+| `h` | Buscar en la ayuda |
+| `c` | Archivos de la config |
+| `l` | Estado del LSP |
+| `m` | Actualizar plugins (`vim.pack.update()`) |
+| `t` | Restaurar sesión (`~/.config/nvim/session.vim`) |
+| `q` | Salir |
 
 ---
 
 ## 📋 Clipboard (macOS)
 
-### Sincronización Automática
-Tu clipboard de macOS está completamente sincronizado con Neovim.
+El clipboard de macOS está sincronizado con Neovim (`clipboard=unnamedplus`).
 
 | Acción | Resultado |
 |--------|-----------|
-| Yank en Nvim (`y`) | Disponible en macOS apps (Cmd+V) |
-| Copy en macOS (Cmd+C) | Disponible en Nvim (p) |
+| `y` en Neovim | Disponible con `Cmd+V` en otras apps |
+| `Cmd+C` en otra app | Disponible con `p` en Neovim |
 
-### Ejemplo
-1. **Neovim → macOS:**
-   - En Neovim: Selecciona texto → `y` (yank)
-   - En Safari: Cmd+V → Pega el contenido ✅
-
-2. **macOS → Neovim:**
-   - En Safari: Cmd+C (copy)
-   - En Neovim: Posiciona cursor → `p` (paste) ✅
-
-### Registers
-| Comando | Descripción |
-|---------|-------------|
-| `"` | Ver registers |
+| Register | Contenido |
+|----------|-----------|
+| `:registers` | Ver todos |
 | `"0` | Último yank |
-| `"-` | Último delete |
-| `"+` | System clipboard |
-| `"*` | System clipboard |
+| `"-` | Último borrado pequeño |
+| `"+` / `"*` | Clipboard del sistema |
 
 ---
 
-## 🎨 Tema
+## 📦 Plugins
 
-### Toggle Tema
+Los plugins se gestionan con `vim.pack` (nativo de Neovim 0.12) en `init.lua`.
+
 | Comando | Descripción |
 |---------|-------------|
-| `<leader>tt` | Toggle tema (manual) |
+| `:lua vim.pack.update()` | Actualizar plugins |
+| `:lua vim.pack.del({ "nombre" })` | Quitar un plugin |
+| `:TSUpdate` | Actualizar parsers de treesitter |
 
-> **Nota:** El tema se establece a tundra por defecto. El toggle se puede implementar en futuras versiones.
-
----
-
-## 📱 Atajos Especiales
-
-### Leader Key
-El leader key es `<space>` (barra espaciadora)
-
-Ejemplos:
-- `<space>e` = Space + e = `<leader>e` (abrir neo-tree)
-- `<space>ff` = Space + f + f = `<leader>ff` (find files)
-
-### Combinaciones Útiles
-| Comando | Qué Hace |
-|---------|----------|
-| `<space><space>` | Find files (shortcut rápido) |
-| `<space>e` | Toggle explorador archivos |
-| `<space>t` / `<space>T` | Toggle/cerrar terminal |
-| `gg` | Abrir LazyGit |
+> Después de instalar o actualizar, guarda el lockfile en el repo:
+> `chezmoi re-add ~/.config/nvim/nvim-pack-lock.json`
 
 ---
 
 ## 🎓 Workflow Típico
 
-### 1. Empezar a Codificar
 ```
-nvim                          # Abre Neovim
-n                             # New file (desde dashboard)
-<esc>                         # O escribe nombre archivo
-:w archivo.ts                 # Guardar
-```
-
-### 2. Navegar y Editar
-```
-<leader>ff                    # Find files
-<leader>e                     # Toggle explorador
-h/j/k/l                       # Navegar
-i                             # Insertar texto
-<esc>                         # Volver a normal
-```
-
-### 3. Usar Snippets
-```
-rfc<Tab>                      # Expande React component
-<Ctrl+k>                      # Siguiente placeholder
-// Escribe nombre
-<Ctrl+k>                      # Siguiente
-// Escribe contenido
-<Esc>                         # Listo
-```
-
-### 4. Usar LSP
-```
-K                             # Ver documentación
-<leader>lnd                   # Ir a definición
-<leader>lra                   # Code actions
-<leader>lrf                   # Format
-```
-
-### 5. Git Workflow
-```
-<leader>gn                    # Ver cambios (hunks)
-<leader>gs                    # Stage cambios
-gg                            # Abrir LazyGit para commit
-```
-
-### 6. Buscar y Reemplazar
-```
-<leader>fg                    # Live grep
-?patrón                       # Buscar
-:%s/viejo/nuevo/gc            # Reemplazar con confirm
+nvim                      # Abre el dashboard
+<Space><Space>            # Buscar un archivo
+<leader>sg                # Buscar texto en el proyecto
+K / gd                    # Ver docs / ir a definición
+cif                       # Reescribir el cuerpo de una función
+saiw"                     # Rodear una palabra con comillas
+:w                        # Guardar (se formatea solo)
+<leader>xx                # Revisar errores del proyecto
+<leader>gs                # Stage del cambio
+<leader>dvo               # Revisar el diff antes del commit
 ```
 
 ---
 
-## 💡 Consejos Útiles
-
-### Comandos Ex Útiles
-```
-:set number              # Mostrar números de línea
-:set nonumber            # Ocultar números
-:set relativenumber      # Números relativos (distancia)
-:set wrap                # Envolver líneas largas
-:set nowrap              # No envolver
-:set expandtab           # Espacios en lugar de tabs
-:set tabstop=2           # Ancho de tab
-:set shiftwidth=4        # Ancho de indentación
-```
-
-### Búsqueda Inteligente
-- `/\cpatrón` - Búsqueda sin importar mayúsculas
-- `/patrón\c` - Mismo resultado
-- `/patrón.*final` - Búsqueda con regex
-
-### Selecciones Útiles
-- `ggVG` - Seleccionar todo archivo
-- `vib` - Seleccionar dentro de brackets
-- `vi"` - Seleccionar dentro de comillas
-- `vip` - Seleccionar párrafo
-
-### Macro Recording
-```
-qa                       # Empezar grabar macro 'a'
-... acciones ...
-q                        # Terminar recording
-@a                       # Ejecutar macro 'a'
-@@                       # Repetir última macro
-```
-
----
-
-## 🚀 Próximos Pasos
-
-1. **Practica Navegación:**
-   - Usa h/j/k/l sin flechas
-   - Aprende w/b/e para movimiento de palabras
-   - Usa gg/G para saltos rápidos
-
-2. **Domina Edición:**
-   - Practica d/c/y con movimientos
-   - Usa `.` para repetir acciones
-   - Aprende operadores compuestos
-
-3. **Explora LSP:**
-   - Usa K para ver documentación
-   - Navega con definiciones
-   - Usa code actions
-
-4. **Automatiza con Snippets:**
-   - Crea custom snippets
-   - Usa placeholders inteligentes
-   - Ahorra tiempo escribiendo
-
-5. **Domina Git:**
-   - Aprende hunk staging
-   - Usa diffview para reviews
-   - Integra LazyGit para commits
-
----
-
-## 📖 Recursos
-
-- `:help` - Documentación de Vim/Neovim
-- `:h keymaps` - Ayuda con keybindings
-- `:h lsp` - Ayuda con LSP
-- `:checkhealth` - Diagnóstico de salud
-- `:version` - Información de Neovim
-
----
-
-## ⚡ Quick Reference - Top 20 Commands
+## ⚡ Top 20
 
 | # | Comando | Función |
 |---|---------|---------|
-| 1 | `<leader>ff` | Buscar archivos |
-| 2 | `<leader>fg` | Buscar texto |
-| 3 | `<leader>e` | Abrir explorador |
-| 4 | `<leader>lnd` | Ir a definición |
-| 5 | `<leader>lra` | Code actions |
-| 6 | `<leader>lrf` | Format code |
-| 7 | `<leader>gs` | Stage git hunk |
-| 8 | `<leader>gb` | Git blame |
-| 9 | `gg` | LazyGit |
-| 10 | `K` | Hover docs |
-| 11 | `Ctrl+h/j/k/l` | Navegar ventanas |
-| 12 | `<leader>t` | Toggle terminal |
-| 13 | `rfc<Tab>` | React component |
-| 14 | `<leader>fr` | Recent files |
-| 15 | `<leader>fb` | Buffers |
-| 16 | `%` | Match bracket |
-| 17 | `*` | Search word |
-| 18 | `u` | Undo |
-| 19 | `/patrón` | Search |
-| 20 | `:w` | Save |
+| 1 | `<Space><Space>` | Buscar archivos |
+| 2 | `<leader>sg` | Buscar texto |
+| 3 | `<leader>e` | Explorador |
+| 4 | `<leader>fr` | Archivos recientes |
+| 5 | `<leader>fb` | Buffers |
+| 6 | `K` | Documentación |
+| 7 | `gd` | Ir a definición |
+| 8 | `<leader>caa` | Code actions |
+| 9 | `<leader>crr` | Renombrar |
+| 10 | `<leader>cf` | Formatear |
+| 11 | `<leader>xx` | Diagnósticos |
+| 12 | `]d` / `[d` | Navegar diagnósticos |
+| 13 | `daf` / `cif` | Borrar / cambiar función |
+| 14 | `]f` / `[f` | Navegar funciones |
+| 15 | `saiw"` / `sd"` | Agregar / quitar comillas |
+| 16 | `gcc` | Comentar línea |
+| 17 | `<leader>gs` | Stage del hunk |
+| 18 | `<leader>gb` | Git blame |
+| 19 | `<leader>dvo` | Diffview |
+| 20 | `Ctrl+h/j/k/l` | Navegar ventanas |
 
 ---
 
 **¡Disfruta usando Neovim! 🚀**
 
-> Última actualización: 2026-05-03
-> Versión: Neovim 0.12.2
+> Última actualización: 2026-10-15
+> Versión: Neovim 0.12.6
