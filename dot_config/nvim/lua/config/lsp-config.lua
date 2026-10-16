@@ -2,8 +2,34 @@ local lspconfig = require("lspconfig")
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "basedpyright", "rust_analyzer", "emmet_ls", "eslint", "ts_ls", "tailwindcss" },
+	ensure_installed = {
+		"lua_ls",
+		"basedpyright",
+		"rust_analyzer",
+		"gopls",
+		"vtsls",
+		"eslint",
+		"tailwindcss",
+		"emmet_ls",
+		"cssls",
+		"jsonls",
+		"prismals",
+		"dockerls",
+		"docker_compose_language_service",
+	},
 })
+
+-- Non-LSP tools installed through Mason (formatters, linters, debuggers)
+local mason_tools = { "goimports", "gofumpt", "golangci-lint", "delve", "gotestsum" }
+local registry = require("mason-registry")
+registry.refresh(function()
+	for _, name in ipairs(mason_tools) do
+		local ok, pkg = pcall(registry.get_package, name)
+		if ok and not pkg:is_installed() then
+			pkg:install()
+		end
+	end
+end)
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 -- Enhanced capabilities
@@ -38,6 +64,9 @@ if vim.lsp.inlay_hint then
 	pcall(function() vim.lsp.inlay_hint.enable(true) end)
 end
 
+-- LSP document colors (Tailwind classes, CSS) as an inline swatch, like nvim-highlight-colors
+vim.lsp.document_color.enable(true, nil, { style = "■ " })
+
 -- Centralized LSP Attach handler
 local function on_lsp_attach(client, bufnr)
 	if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
@@ -63,7 +92,6 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set('n', '<leader>caf', function()
 		require("conform").format({
 			async = true,
-			lsp_format = "fallback",
 			timeout_ms = 2000,
 		})
 	end, { buffer = bufnr, silent = true, desc = "Format Document" })
@@ -143,30 +171,69 @@ vim.lsp.config('lua_ls', {
 	},
 })
 
-vim.lsp.config('ts_ls', {
+-- vtsls: TypeScript LSP (replaces ts_ls), faster on large Next.js projects
+local ts_settings = {
+	inlayHints = {
+		parameterNames = { enabled = "all" },
+		parameterTypes = { enabled = true },
+		variableTypes = { enabled = true },
+		propertyDeclarationTypes = { enabled = true },
+		functionLikeReturnTypes = { enabled = true },
+		enumMemberValues = { enabled = true },
+	},
+	preferences = {
+		quoteStyle = "single",
+		importModuleSpecifier = "relative",
+	},
+	updateImportsOnFileMove = { enabled = "always" },
+	suggest = { completeFunctionCalls = true },
+}
+
+vim.lsp.config('vtsls', {
 	capabilities = capabilities,
 	settings = {
-		typescript = {
-			inlayHints = {
-				includeInlayParameterNameHints = 'all',
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayVariableTypeHints = true,
-				includeInlayVariableTypeHintsWhenTypeIsAmbiguous = true,
-				includeInlayPropertyDeclarationTypeHints = true,
-				includeInlayFunctionLikeReturnTypeHints = true,
-				includeInlayEnumMemberValueHints = true,
+		vtsls = {
+			autoUseWorkspaceTsdk = true,
+			enableMoveToFileCodeAction = true,
+		},
+		typescript = ts_settings,
+		javascript = ts_settings,
+	},
+})
+
+vim.lsp.config('gopls', {
+	capabilities = capabilities,
+	settings = {
+		gopls = {
+			gofumpt = true,
+			staticcheck = true,
+			usePlaceholders = true,
+			completeUnimported = true,
+			analyses = {
+				unusedparams = true,
+				unusedwrite = true,
+				nilness = true,
+				shadow = true,
 			},
-			preferences = {
-				quotePreference = 'single',
-				importModuleSpecifierPreference = 'relative',
+			hints = {
+				assignVariableTypes = true,
+				compositeLiteralFields = true,
+				constantValues = true,
+				functionTypeParameters = true,
+				parameterNames = true,
+				rangeVariableTypes = true,
 			},
 		},
-		javascript = {
-			inlayHints = {
-				includeInlayParameterNameHints = 'all',
-				includeInlayFunctionParameterTypeHints = true,
-				includeInlayVariableTypeHints = true,
-			},
+	},
+})
+
+vim.lsp.config('jsonls', {
+	capabilities = capabilities,
+	settings = {
+		json = {
+			-- package.json, tsconfig.json, .eslintrc, etc. from schemastore.org
+			schemas = require("schemastore").json.schemas(),
+			validate = { enable = true },
 		},
 	},
 })
@@ -210,14 +277,6 @@ vim.lsp.config('basedpyright', {
 	},
 })
 
-vim.lsp.config('prisma', {
-	capabilities = capabilities,
-	cmd = { 'prisma-language-server', '--stdio' },
-	filetypes = { 'prisma' },
-	-- Since root_pattern might not be globally available, we let native LSP handle it when possible or use lspconfig.util
-	root_markers = { '.git', 'package.json', 'schema.prisma' },
-})
-
 vim.lsp.config('eslint', {
 	capabilities = capabilities,
 	settings = {
@@ -240,56 +299,4 @@ vim.lsp.config('tailwindcss', {
 			},
 		},
 	},
-})
-
-vim.lsp.config('dockerls', {
-	capabilities = capabilities,
-	cmd = { 'docker-langserver', '--stdio' },
-	filetypes = { 'dockerfile' },
-	root_markers = { 'Dockerfile', '.dockerignore', 'docker-compose.yml', 'docker-compose.yaml' },
-})
-
--- Auto-start dockerls when opening dockerfile
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'dockerfile',
-	callback = function(args)
-		vim.lsp.start({
-			name = 'dockerls',
-			cmd = { 'docker-langserver', '--stdio' },
-			root_dir = vim.fs.dirname(vim.fs.find({ 'Dockerfile', '.dockerignore', 'docker-compose.yml' }, { upward = true })[1] or vim.fn.getcwd()),
-			capabilities = capabilities,
-		}, { reuse_client = function(client, conf)
-			return client.name == conf.name
-		end })
-	end,
-})
-
--- Docker Compose LSP Configuration
-local compose_langserver_path = '/opt/homebrew/lib/node_modules/@microsoft/compose-language-service/bin/docker-compose-langserver'
-
--- Fallback to alternative paths if not found
-if not vim.fn.executable(compose_langserver_path) then
-	compose_langserver_path = 'docker-compose-langserver'
-end
-
-vim.lsp.config('docker_compose_ls', {
-	capabilities = capabilities,
-	cmd = { compose_langserver_path, '--stdio' },
-	filetypes = { 'yaml.docker-compose' },
-	root_markers = { 'docker-compose.yml', 'docker-compose.yaml' },
-})
-
--- Auto-start docker-compose LSP when opening docker-compose.yml/yaml
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'yaml.docker-compose',
-	callback = function(args)
-		vim.lsp.start({
-			name = 'docker_compose_ls',
-			cmd = { compose_langserver_path, '--stdio' },
-			root_dir = vim.fs.dirname(vim.fs.find({ 'docker-compose.yml', 'docker-compose.yaml' }, { upward = true })[1] or vim.fn.getcwd()),
-			capabilities = capabilities,
-		}, { reuse_client = function(client, conf)
-			return client.name == conf.name
-		end })
-	end,
 })

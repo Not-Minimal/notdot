@@ -131,6 +131,15 @@ vim.pack.add({
 	{ src = "https://github.com/folke/lazydev.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.nvim" },
 	{ src = "https://github.com/folke/trouble.nvim" },
+	{ src = "https://github.com/b0o/SchemaStore.nvim" },
+	{ src = "https://github.com/mfussenegger/nvim-lint" },
+	{ src = "https://github.com/brenoprata10/nvim-highlight-colors" },
+	{ src = "https://github.com/mfussenegger/nvim-dap" },
+	{ src = "https://github.com/leoluz/nvim-dap-go" },
+	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
+	{ src = "https://github.com/nvim-neotest/nvim-nio" },
+	{ src = "https://github.com/nvim-neotest/neotest" },
+	{ src = "https://github.com/fredrikaverpil/neotest-golang" },
 })
 
 -- ==============================================================================
@@ -204,4 +213,8 @@ require("config.treesitter-config")
 require("config.lazydev-config")
 require("config.mini-config")
 require("config.trouble-config")
+require("config.lint-config")
+require("config.highlight-colors-config")
+require("config.dap-config")
+require("config.neotest-config")
 require("config.fff-config")

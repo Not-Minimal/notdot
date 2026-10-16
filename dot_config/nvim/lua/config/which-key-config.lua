@@ -11,6 +11,9 @@ require("which-key").setup({
       { "<leader>s", group = "Search"},
       { "<leader>g", group = "Git" },
       { "<leader>x", group = "Diagnostics (Trouble)" },
+      { "<leader>d", group = "Debug / Diffview" },
+      { "<leader>dv", group = "Diffview" },
+      { "<leader>t", group = "Tests" },
 
       -- LSP Groups
       { "<leader>c", group = "Code (LSP)" },
