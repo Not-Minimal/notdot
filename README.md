@@ -17,11 +17,13 @@ Dotfiles para macOS gestionados con [chezmoi](https://www.chezmoi.io/): Neovim c
 
 - 🚀 **Sin gestor externo** - Plugins con `vim.pack` nativo de Neovim 0.12 y lockfile versionado
 - ⚡ **Búsqueda ultrarrápida** - fff.nvim (archivos con frecency + live grep en Rust)
-- 🎯 **LSP nativo** - `vim.lsp.config` + Mason (TypeScript, Python, Rust, Lua, Tailwind, ESLint, Emmet)
+- 🎯 **LSP nativo** - `vim.lsp.config` + Mason (Go, TypeScript/Next.js, Prisma, Python, Rust, Lua, Tailwind, ESLint, CSS, JSON, Docker)
+- 🐹 **Go completo** - gopls, goimports + gofumpt al guardar, golangci-lint, depurador (delve) y tests (neotest)
 - 🌳 **Treesitter** - Resaltado, indentación y textobjects por función/clase/bloque
 - ✂️ **Edición rápida** - mini.ai, mini.surround, autopairs y auto-cierre de tags HTML/JSX
 - 🐛 **Diagnósticos claros** - trouble.nvim para errores, símbolos y referencias
-- 🧹 **Formato al guardar** - conform.nvim (stylua, biome, black, isort, prettier)
+- 🧹 **Formato al guardar** - conform.nvim (stylua, biome o prettier según el proyecto, goimports, gofumpt, black, isort, `prisma format`)
+- 🎨 **Colores en línea** - Muestra los colores hex y las clases de Tailwind
 - 📦 **Dashboard propio** - alpha-nvim con accesos rápidos
 - ⌨️ **Atajos organizados** - Menú jerárquico con which-key
 - 🎨 **Tema** - Ayu dark
@@ -107,6 +109,14 @@ gd             → Ir a definición
 [d / ]d        → Diagnóstico anterior / siguiente
 ```
 
+### Depuración y tests
+```
+<leader>db     → Breakpoint
+<leader>dc     → Iniciar / continuar depuración
+<leader>tt     → Correr el test más cercano
+<leader>tf     → Correr los tests del archivo
+```
+
 ### Edición (mini.ai, mini.surround, treesitter)
 ```
 daf / cif      → Borrar función / cambiar su contenido
@@ -127,6 +137,8 @@ Lista completa en el **[CHEATSHEET](./CHEATSHEET.md)**.
 
 **LSP y autocompletado**
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), [mason.nvim](https://github.com/mason-org/mason.nvim), [mason-lspconfig](https://github.com/mason-org/mason-lspconfig.nvim), [astrolsp](https://github.com/AstroNvim/astrolsp)
+- [SchemaStore.nvim](https://github.com/b0o/SchemaStore.nvim) - Esquemas JSON (package.json, tsconfig, ...)
+- [nvim-lint](https://github.com/mfussenegger/nvim-lint) - Linters sin LSP (golangci-lint)
 - [blink.cmp](https://github.com/Saghen/blink.cmp) - Autocompletado
 - [lazydev.nvim](https://github.com/folke/lazydev.nvim) - API de Neovim para lua_ls
 - [supermaven-nvim](https://github.com/supermaven-inc/supermaven-nvim) - Sugerencias con IA
@@ -139,6 +151,11 @@ Lista completa en el **[CHEATSHEET](./CHEATSHEET.md)**.
 - [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - Cierre de paréntesis
 - [conform.nvim](https://github.com/stevearc/conform.nvim) - Formato al guardar
 
+**Depuración y tests**
+- [nvim-dap](https://github.com/mfussenegger/nvim-dap) + [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) + [nvim-dap-go](https://github.com/leoluz/nvim-dap-go) - Depurador (delve)
+- [neotest](https://github.com/nvim-neotest/neotest) + [neotest-golang](https://github.com/fredrikaverpil/neotest-golang) - Tests (gotestsum)
+- [nvim-nio](https://github.com/nvim-neotest/nvim-nio) - Dependencia de dap-ui y neotest
+
 **Git**
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Cambios por línea, stage y blame
 - [diffview.nvim](https://github.com/sindrets/diffview.nvim) - Diffs e historial
@@ -150,6 +167,7 @@ Lista completa en el **[CHEATSHEET](./CHEATSHEET.md)**.
 - [which-key.nvim](https://github.com/folke/which-key.nvim) - Menú de atajos
 - [noice.nvim](https://github.com/folke/noice.nvim) + [nvim-notify](https://github.com/rcarriga/nvim-notify) - Cmdline y notificaciones
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) - Iconos
+- [nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors) - Colores hex/rgb en línea
 
 **Otros**
 - [herdr-nvim](https://github.com/ChmaraX/herdr-nvim), [vim-wakatime](https://github.com/wakatime/vim-wakatime), [plenary.nvim](https://github.com/nvim-lua/plenary.nvim), [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
@@ -161,6 +179,8 @@ Lista completa en el **[CHEATSHEET](./CHEATSHEET.md)**.
 | Agregar/quitar plugins | `vim.pack.add({...})` en `dot_config/nvim/init.lua` |
 | Tema | `dot_config/nvim/lua/config/theme-config.lua` |
 | Servidores LSP | `ensure_installed` en `lua/config/lsp-config.lua` o `:Mason` |
+| Herramientas de Go (gofumpt, delve, ...) | `mason_tools` en `lua/config/lsp-config.lua` |
+| Linters | `lua/config/lint-config.lua` |
 | Formateadores | `lua/config/conform-config.lua` (+ `Brewfile`) |
 | Parsers de treesitter | `lua/config/treesitter-config.lua` |
 | Grupos de which-key | `lua/config/which-key-config.lua` |
@@ -180,6 +200,13 @@ brew bundle --file ~/.local/share/chezmoi/Brewfile   # instala los formateadores
 ```vim
 :ConformInfo
 ```
+
+### Go: no hay LSP, formato o depurador
+Mason instala gopls y las herramientas (goimports, gofumpt, golangci-lint, delve, gotestsum) la primera vez que abres Neovim. Revisa el progreso con:
+```vim
+:Mason
+```
+Go se instala con `mise` (ver `~/.config/mise/config.toml`).
 
 ### LSP no funciona
 ```vim

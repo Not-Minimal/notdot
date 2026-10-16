@@ -73,7 +73,11 @@ dot_config/nvim/
 ├── nvim-pack-lock.json         # Versiones fijadas de los plugins
 └── lua/config/
     ├── fff-config.lua          # Buscador de archivos/grep + pickers (buffers, recientes, ayuda)
-    ├── lsp-config.lua          # Mason + servidores LSP + keymaps <leader>c
+    ├── lsp-config.lua          # Mason + servidores LSP + herramientas de Go + keymaps <leader>c
+    ├── lint-config.lua         # nvim-lint (golangci-lint)
+    ├── dap-config.lua          # Depurador (nvim-dap + dap-ui + delve) <leader>d
+    ├── neotest-config.lua      # Tests (neotest-golang + gotestsum) <leader>t
+    ├── highlight-colors-config.lua # Colores hex/rgb en línea
     ├── lazydev-config.lua      # API de Neovim para lua_ls
     ├── blink-config.lua        # Autocompletado
     ├── supermaven-config.lua   # Sugerencias con IA
@@ -110,6 +114,12 @@ Gestionados con `vim.pack` (nativo de Neovim 0.12), sin lazy.nvim.
 - **lazydev.nvim** - Autocompletado de la API de Neovim en Lua
 - **supermaven-nvim** - Sugerencias con IA
 - **trouble.nvim** - Diagnósticos, símbolos y referencias
+- **SchemaStore.nvim** - Esquemas para jsonls (package.json, tsconfig, ...)
+- **nvim-lint** - golangci-lint para Go
+
+### Depuración y tests
+- **nvim-dap**, **nvim-dap-ui**, **nvim-dap-go** - Depurador (delve)
+- **neotest**, **neotest-golang**, **nvim-nio** - Tests (gotestsum)
 
 ### Treesitter y edición
 - **nvim-treesitter** + **nvim-treesitter-textobjects** (rama `main`)
@@ -129,6 +139,7 @@ Gestionados con `vim.pack` (nativo de Neovim 0.12), sin lazy.nvim.
 - **which-key.nvim** - Menú de atajos
 - **noice.nvim** + **nvim-notify** - Cmdline y notificaciones
 - **nvim-web-devicons** - Iconos
+- **nvim-highlight-colors** - Colores hex/rgb en línea
 
 ### Otros
 - **herdr-nvim**, **vim-wakatime**, **plenary.nvim**, **nui.nvim**
@@ -149,7 +160,9 @@ Gestionados con `vim.pack` (nativo de Neovim 0.12), sin lazy.nvim.
 - **Día 9:** Git (gitsigns `<Space>g`, diffview `<Space>dv`)
 - **Día 10:** LSP (`K`, `gd`, `<Space>c`) y trouble (`<Space>x`)
 - **Día 11:** Textobjects (`daf`, `cia`, `ciq`) y surround (`sa`, `sd`, `sr`)
-- **Día 12-14:** Combínalos
+- **Día 12:** Tests (`<Space>tt`, `<Space>tf`, `<Space>to`)
+- **Día 13:** Depurador (`<Space>db`, `<Space>dc`, `<Space>dn`, `<Space>de`)
+- **Día 14:** Combínalos
 
 ### Semana 3+
 - Macros (`qa ... q`, `@a`)
@@ -226,6 +239,10 @@ vim.cmd.colorscheme("tu-tema")
 ```vim
 :lua require("fff.download").download_or_build_binary()
 ```
+
+### Go: falta gopls, el formato o el depurador
+- Mason instala gopls, goimports, gofumpt, golangci-lint, delve y gotestsum al abrir Neovim; revisa con `:Mason`
+- Go debe estar en el PATH (lo instala `mise`)
 
 ### LSP no funciona
 - `:LspInfo` para ver el estado

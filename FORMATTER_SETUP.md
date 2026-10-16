@@ -10,15 +10,22 @@ Los formateadores son programas externos: si no están instalados, conform no pu
 | Lenguaje | Formateador | Instalación |
 |----------|-------------|-------------|
 | Lua | stylua | Brewfile |
-| JavaScript / TypeScript / JSX / TSX | biome | Brewfile |
-| JSON / JSONC / CSS | biome | Brewfile |
+| JavaScript / TypeScript / JSX / TSX | biome **o** prettier (ver abajo) | Brewfile / proyecto |
+| JSON / JSONC / CSS | biome **o** prettier (ver abajo) | Brewfile / proyecto |
+| Go | goimports + gofumpt | Mason (automático) |
 | Python | isort + black | Brewfile |
-| HTML / Markdown | prettier | Brewfile |
+| HTML / Markdown | prettier | Brewfile / proyecto |
 | Rust | rustfmt | Toolchain de Rust (mise) |
+| Prisma | LSP (`prisma format`) | Mason (prismals, automático) |
 | Dockerfile y otros | LSP | Automático si el servidor lo soporta |
 | Todos | trim_whitespace, trim_newlines | Incluidos en conform |
 
 `sql` y `java` no se formatean al guardar.
+
+### biome o prettier
+- Si el proyecto tiene `biome.json` / `biome.jsonc` (en la carpeta del archivo o más arriba), se usa **biome**.
+- Si no, se usa **prettier**, que es lo habitual en proyectos Next.js.
+- Los dos usan la versión instalada en el proyecto (`node_modules/.bin`) si existe, y si no la global de Homebrew. También respetan la config del proyecto (`biome.json`, `.prettierrc`).
 
 ## Instalación
 
@@ -32,13 +39,16 @@ O solo estos:
 brew install stylua biome black isort prettier
 ```
 
-### 2. Rustfmt (solo si programas en Rust)
+### 2. Herramientas de Go (automático)
+Mason instala `goimports` y `gofumpt` (y `golangci-lint`, `delve`, `gotestsum`) la primera vez que abres Neovim. La lista está en `mason_tools` en `lua/config/lsp-config.lua`. Go en sí lo instala `mise`.
+
+### 3. Rustfmt (solo si programas en Rust)
 Viene con el toolchain de Rust, gestionado con `mise`:
 ```bash
 mise use -g rust
 ```
 
-### 3. Reinicia Neovim
+### 4. Reinicia Neovim
 La config busca la ruta de cada formateador al arrancar.
 
 ## Verificación
@@ -76,5 +86,7 @@ Cada formateador lee su propio archivo de configuración del proyecto:
 ## Configuración
 
 - Formateadores y format on save: `dot_config/nvim/lua/config/conform-config.lua`
-- `format_on_save` usa un timeout de 5 segundos y, si no hay formateador para el lenguaje, usa el del LSP (`lsp_format = "fallback"`).
+- `format_on_save` usa un timeout de 5 segundos.
+- `default_format_opts = { lsp_format = "fallback" }`: si no hay formateador para el lenguaje, se usa el del LSP. Prisma y Dockerfile usan `lsp_format = "prefer"` en `formatters_by_ft`.
+- No pases `lsp_format` directamente a `conform.format()`: tendría prioridad sobre las opciones de cada lenguaje.
 - Edita en el repo de chezmoi y aplica con `chezmoi apply`.

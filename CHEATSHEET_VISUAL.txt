@@ -32,6 +32,15 @@
 │  ├─ css: Símbolos        └─ xl: Location list   EXPLORADOR           │
 │  └─ cf:  Formatear                              └─ e: nvim-tree      │
 │                                                                      │
+│  DEBUG (d)               TESTS (t)                                   │
+│  ├─ db: Breakpoint       ├─ tt: Test cercano                         │
+│  ├─ dc: Iniciar/seguir   ├─ tf: Tests archivo                        │
+│  ├─ dn: Siguiente línea  ├─ ta: Todos                                │
+│  ├─ di/do: Entrar/salir  ├─ td: Depurar test                         │
+│  ├─ de: Evaluar          ├─ ts: Resumen                              │
+│  ├─ du: UI               └─ to: Output                               │
+│  └─ dq: Terminar                                                     │
+│                                                                      │
 └──────────────────────────────────────────────────────────────────────┘
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -286,6 +295,45 @@ En modo insert:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+🐞 DEPURADOR (nvim-dap + delve)
+
+     <Space>db: Breakpoint en la línea          ●
+            ↓
+     <Space>dc: Iniciar (elige "Debug", "Debug test", ...)
+            ↓
+     ┌────────────────────┬──────────────────────────┐
+     │ Variables / Scopes │                          │
+     │ Watches            │   código                 │
+     │ Stack (llamadas)   │ ▶ total := Sum(2, 3)     │
+     │ Breakpoints        │                          │
+     ├────────────────────┴──────────────────────────┤
+     │ REPL / Consola                                │
+     └───────────────────────────────────────────────┘
+            ↓
+     <Space>dn: Siguiente línea   <Space>di: Entrar en la función
+     <Space>do: Salir             <Space>de: Evaluar lo que está bajo el cursor
+     <Space>dc: Continuar         <Space>dq: Terminar
+
+     <Space>dB: Breakpoint con condición  (◆)  ej:  i == 10
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧪 TESTS (neotest + gotestsum)
+
+     func TestSum(t *testing.T) {      ← cursor aquí
+            ↓
+     <Space>tt: Correr este test
+            ↓
+     ✔ TestSumOK        (verde)
+     ✖ TestSumFail      (rojo)  → <Space>to: ver por qué falló
+            ↓
+     <Space>td: Depurar el test con breakpoints
+
+     <Space>tf: Todo el archivo    <Space>ta: Todo el proyecto
+     <Space>ts: Árbol de tests     <Space>tl: Repetir el último
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 💡 AUTOCOMPLETADO E IA
 
      Escribes...  →  aparece el menú (blink.cmp)
@@ -307,10 +355,12 @@ En modo insert:
      :w  →  conform.nvim formatea automáticamente
 
      Lua ................ stylua
-     JS/TS/JSON/CSS ..... biome
+     JS/TS/JSON/CSS ..... biome (si hay biome.json) o prettier
+     Go ................. goimports + gofumpt
      Python ............. isort + black
      HTML/Markdown ...... prettier
      Rust ............... rustfmt
+     Prisma ............. prisma format (LSP)
      Otros .............. LSP
 
      <Space>cf: Formatear a mano    :ConformInfo: Ver estado
@@ -371,7 +421,12 @@ CON NÚMEROS (antes del comando):
    - Navega: Ctrl+hjkl
    - Cierra: Ctrl+w q
 
-5. GIT (5 min):
+5. GO (10 min):
+   - Escribe fmt.Println sin import y guarda (:w): el import aparece solo
+   - Crea un _test.go y corre el test: <Space>tt
+   - Pon un breakpoint y depura: <Space>db, <Space>dc, <Space>dn
+
+6. GIT (5 min):
    - Ve cambios: <Space>gn
    - Stage: <Space>gs
    - Revisa: <Space>dvo

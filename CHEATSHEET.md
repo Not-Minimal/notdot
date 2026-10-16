@@ -13,6 +13,8 @@
 - [Git](#-git)
 - [LSP](#-lsp)
 - [Diagnósticos](#-diagnósticos)
+- [Depuración (DAP)](#-depuración-dap)
+- [Tests (neotest)](#-tests-neotest)
 - [Autocompletado e IA](#-autocompletado-e-ia)
 - [Formato](#-formato)
 - [Dashboard](#-dashboard)
@@ -238,6 +240,17 @@ Al escribir `<div>` se cierra solo con `</div>`; al renombrar la etiqueta de ape
 
 Estos atajos están disponibles cuando hay un servidor LSP activo en el buffer.
 
+### Servidores (instalados por Mason)
+| Lenguaje | Servidor |
+|----------|----------|
+| Go | gopls (staticcheck, gofumpt, inlay hints) |
+| TypeScript / JavaScript | vtsls |
+| ESLint / Tailwind / Emmet | eslint, tailwindcss, emmet_ls |
+| CSS / JSON | cssls, jsonls (con esquemas de SchemaStore) |
+| Prisma | prismals |
+| Python / Rust / Lua | basedpyright, rust_analyzer, lua_ls |
+| Docker | dockerls, docker_compose_language_service |
+
 ### Rápidos
 | Comando | Descripción |
 |---------|-------------|
@@ -289,6 +302,50 @@ Estos atajos están disponibles cuando hay un servidor LSP activo en el buffer.
 | `]D` / `[D` | Último / primer diagnóstico |
 | `Ctrl+w` `d` | Ver diagnóstico bajo el cursor |
 
+### Linters
+En Go, **golangci-lint** (vía nvim-lint) corre al abrir, guardar y salir de modo insert. Sus avisos aparecen junto a los del LSP.
+
+---
+
+## 🐞 Depuración (DAP)
+
+nvim-dap + nvim-dap-ui. En Go usa **delve** (instalado por Mason). La UI se abre sola al empezar y se cierra al terminar.
+
+| Comando | Descripción |
+|---------|-------------|
+| `<leader>db` | Poner / quitar breakpoint |
+| `<leader>dB` | Breakpoint con condición |
+| `<leader>dc` | Iniciar / continuar (elige configuración) |
+| `<leader>dn` | Paso: siguiente línea (step over) |
+| `<leader>di` | Paso: entrar en la función (step into) |
+| `<leader>do` | Paso: salir de la función (step out) |
+| `<leader>de` | Evaluar expresión bajo el cursor / selección |
+| `<leader>dr` | Abrir / cerrar REPL |
+| `<leader>dl` | Repetir la última sesión |
+| `<leader>du` | Abrir / cerrar la UI |
+| `<leader>dq` | Terminar |
+| `<leader>dt` | Depurar el test de Go bajo el cursor |
+
+Signos: `●` breakpoint, `◆` condicional, `▶` línea actual.
+
+---
+
+## 🧪 Tests (neotest)
+
+Para Go usa neotest-golang con **gotestsum** (instalado por Mason). Los resultados aparecen en la columna de signos.
+
+| Comando | Descripción |
+|---------|-------------|
+| `<leader>tt` | Correr el test más cercano |
+| `<leader>tf` | Correr los tests del archivo |
+| `<leader>ta` | Correr todos los tests del proyecto |
+| `<leader>tl` | Repetir el último |
+| `<leader>td` | Depurar el test más cercano |
+| `<leader>tS` | Detener |
+| `<leader>ts` | Resumen (árbol de tests) |
+| `<leader>to` | Ver el output del test |
+| `<leader>tO` | Panel de output |
+
 ---
 
 ## 💡 Autocompletado e IA
@@ -301,6 +358,9 @@ Estos atajos están disponibles cuando hay un servidor LSP activo en el buffer.
 | `Enter` | Aceptar (agrega paréntesis en funciones) |
 
 Fuentes: LSP, rutas, snippets del LSP, buffer y, en archivos Lua, la API de Neovim (lazydev).
+
+### Colores
+Los colores hex/rgb/hsl y las clases de Tailwind (`bg-red-500`) muestran un cuadro `■` con el color al lado.
 
 ### Supermaven (IA)
 | Comando | Descripción |
@@ -318,11 +378,15 @@ Se formatea automáticamente al guardar con conform.nvim.
 | Lenguaje | Formateador |
 |----------|-------------|
 | Lua | stylua |
-| JS / TS / JSON / CSS | biome |
+| JS / TS / JSON / CSS | biome si el proyecto tiene `biome.json`, si no prettier |
+| Go | goimports (agrega/ordena imports) + gofumpt |
 | Python | isort + black |
 | HTML / Markdown | prettier |
 | Rust | rustfmt |
-| Resto | LSP (si lo soporta) |
+| Prisma | LSP (`prisma format`) |
+| Dockerfile y resto | LSP (si lo soporta) |
+
+biome y prettier usan la versión y la config del proyecto (`node_modules`) si existen.
 
 | Comando | Descripción |
 |---------|-------------|
@@ -424,7 +488,7 @@ saiw"                     # Rodear una palabra con comillas
 | 17 | `<leader>gs` | Stage del hunk |
 | 18 | `<leader>gb` | Git blame |
 | 19 | `<leader>dvo` | Diffview |
-| 20 | `Ctrl+h/j/k/l` | Navegar ventanas |
+| 20 | `<leader>tt` / `<leader>db` | Correr test / breakpoint |
 
 ---
 
