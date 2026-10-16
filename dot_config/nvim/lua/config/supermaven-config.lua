@@ -1,6 +1,7 @@
 require("supermaven-nvim").setup({
 	keymaps = {
-		accept_suggestion = "<Tab>",
+		-- Not <Tab>: blink.cmp uses it to cycle the completion menu
+		accept_suggestion = "<C-l>",
 		clear_suggestion = "<C-]>",
 		accept_word = "<C-j>",
 	},

@@ -305,7 +305,7 @@ Fuentes: LSP, rutas, snippets del LSP, buffer y, en archivos Lua, la API de Neov
 ### Supermaven (IA)
 | Comando | Descripción |
 |---------|-------------|
-| `Tab` | Aceptar sugerencia completa |
+| `Ctrl+l` | Aceptar sugerencia completa |
 | `Ctrl+j` | Aceptar una palabra |
 | `Ctrl+]` | Descartar sugerencia |
 

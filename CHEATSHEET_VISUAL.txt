@@ -1,6 +1,6 @@
 
 ╔════════════════════════════════════════════════════════════════════════════╗
-║                   🎯 NEOVIM VISUAL CHEATSHEET                             ║
+║                   🎯 NEOVIM VISUAL CHEATSHEET                              ║
 ║                      Guía Visual Rápida                                    ║
 ╚════════════════════════════════════════════════════════════════════════════╝
 
@@ -8,45 +8,51 @@
 
 🗺️  MAPA DE NAVEGACIÓN POR LEADER KEY
 
-                          LEADER = SPACE (Barra espaciadora)
+                    LEADER = SPACE (Barra espaciadora)
+          Presiona <Space> y espera: which-key muestra el menú
 
-┌─────────────────────────────────────────────────────────────────────┐
-│                    <space> + KEY                                     │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                       │
-│  ARCHIVO/BÚSQUEDA (f)          GIT (g)              LSP (l)          │
-│  ├─ ff: Find files             ├─ gn: Next hunk     ├─ lnd: Definition
-│  ├─ fr: Recent files           ├─ gp: Prev hunk     ├─ lra: Code action
-│  ├─ fg: Live grep              ├─ gs: Stage         ├─ lrf: Format    
-│  ├─ fb: Buffers                ├─ gr: Reset         ├─ lrn: Rename    
-│  ├─ fgc: Commits               ├─ gb: Blame         └─ lsd: Symbols   
-│  └─ fgb: Branches              └─ dvo: Diffview                      
-│                                                                       │
-│  EXPLORADOR (e)                TERMINAL (t)                           │
-│  └─ e: Toggle Neo-tree         ├─ t: Toggle          TEMA (t, solo)  
-│                                └─ T: Close           └─ tt: Toggle    
-│                                                                       │
-└─────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│                         <Space> + TECLA                              │
+├──────────────────────────────────────────────────────────────────────┤
+│                                                                      │
+│  ARCHIVOS (f)            BÚSQUEDA (s)           GIT (g)              │
+│  ├─ <Space>: Buscar      ├─ sg: Live grep       ├─ gn/gp: Hunks      │
+│  ├─ fr: Recientes        ├─ sw: Grep palabra    ├─ gs: Stage hunk    │
+│  ├─ fb: Buffers          ├─ sh: Ayuda           ├─ gr: Reset hunk    │
+│  └─ fs: Re-escanear      ├─ sd: Diagnósticos    ├─ gb: Blame         │
+│                          ├─ sq: Quickfix        ├─ gd: Diff          │
+│                          └─ sR: Registers       └─ gc: Commits       │
+│                                                                      │
+│  CÓDIGO / LSP (c)        TROUBLE (x)            DIFFVIEW (dv)        │
+│  ├─ caa: Code action     ├─ xx: Diag. proyecto  ├─ dvo: Abrir        │
+│  ├─ crr: Renombrar       ├─ xb: Diag. buffer    ├─ dvf: Historial    │
+│  ├─ cnd: Definición      ├─ xs: Símbolos        ├─ dvh: Hist. buffer │
+│  ├─ cnr: Referencias     ├─ xr: Referencias     └─ dvc: Cerrar       │
+│  ├─ cdd: Diag. línea     ├─ xq: Quickfix                             │
+│  ├─ css: Símbolos        └─ xl: Location list   EXPLORADOR           │
+│  └─ cf:  Formatear                              └─ e: nvim-tree      │
+│                                                                      │
+└──────────────────────────────────────────────────────────────────────┘
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ⌨️  TECLAS RÁPIDAS SIN LEADER
 
-┌────────────────────────────────────────────────────────────────┐
-│ MOVIMIENTO              EDICIÓN               OTROS             │
-├────────────────────────────────────────────────────────────────┤
-│ h: ←   j: ↓   k: ↑   l: →     i: Insert       /: Buscar       │
-│ w: Next word           a: Append              n: Siguiente     │
-│ b: Prev word           o: New line            u: Undo          │
-│ e: End word            x: Delete              .: Repeat        │
-│ gg: Top                d: Delete              %: Match bracket │
-│ G: Bottom              y: Yank                *: Search word   │
-│ $: End line            p: Paste                                 │
-│ 0: Start line          ~: Toggle case                          │
-│ ^: First char          J: Join lines                           │
-│ Ctrl+f: Page ↓                                                  │
-│ Ctrl+b: Page ↑                                                  │
-└────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│ MOVIMIENTO              EDICIÓN               OTROS              │
+├──────────────────────────────────────────────────────────────────┤
+│ h: ←   j: ↓   k: ↑   l: →  i: Insert          /: Buscar          │
+│ w: Next word           a: Append              n: Siguiente       │
+│ b: Prev word           o: New line            u: Undo            │
+│ e: End word            x: Delete              .: Repeat          │
+│ gg: Top                d: Delete              %: Match bracket   │
+│ G: Bottom              y: Yank                *: Search word     │
+│ $: End line            p: Paste               gcc: Comentar      │
+│ 0: Start line          ~: Toggle case         K: Documentación   │
+│ ]f/[f: Función         J: Join lines          gd: Definición     │
+│ ]k/[k: Clase           sa/sd/sr: Surround     gr: Referencias    │
+│ ]d/[d: Diagnóstico                                               │
+└──────────────────────────────────────────────────────────────────┘
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -59,73 +65,92 @@
               ↓
      ┌─────────────────────────────────────┐
      │   DASHBOARD                         │
-     │   n: New File                       │
-     │   f: Find File                      │
-     │   r: Recent Files                   │
-     │   q: Quit                           │
+     │   f: Buscar archivo                 │
+     │   r: Recientes                      │
+     │   g: Live grep                      │
+     │   n: Nuevo archivo                  │
      └────────┬────────────────────────────┘
               │
               ↓
      ┌─────────────────────────────────────┐
      │   EDITAR CÓDIGO                     │
-     │   i: Insertar                       │
-     │   Esc: Modo normal                  │
-     │   dd: Eliminar línea                │
-     │   yy: Copiar línea                  │
-     │   rfc<Tab>: Snippet                 │
+     │   i: Insertar      Esc: Normal      │
+     │   cif: Reescribir función           │
+     │   saiw": Rodear con comillas        │
+     │   Ctrl+l: Aceptar sugerencia IA     │
      └────────┬────────────────────────────┘
               │
               ↓
      ┌─────────────────────────────────────┐
      │   USAR LSP                          │
      │   K: Documentación                  │
-     │   <space>lnd: Ir definición         │
-     │   <space>lra: Code actions          │
-     │   <space>lrf: Format                │
+     │   gd: Ir a definición               │
+     │   <Space>caa: Code actions          │
+     │   <Space>xx: Ver errores            │
      └────────┬────────────────────────────┘
               │
               ↓
      ┌─────────────────────────────────────┐
-     │   CONTROL DE VERSION                │
-     │   <space>gs: Stage hunk             │
-     │   <space>gb: Git blame              │
-     │   gg: LazyGit (commit)              │
+     │   GUARDAR                           │
+     │   :w  (se formatea solo)            │
      └────────┬────────────────────────────┘
               │
               ↓
      ┌─────────────────────────────────────┐
-     │   GUARDAR Y SALIR                   │
-     │   :w: Guardar                       │
-     │   :wq o :q: Salir                   │
+     │   CONTROL DE VERSIÓN                │
+     │   <Space>gs: Stage hunk             │
+     │   <Space>dvo: Revisar diff          │
+     │   <Space>gb: Git blame              │
      └─────────────────────────────────────┘
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📊 MODO OPERADOR + MOVIMIENTO
-
-En modo normal, puedes combinar operadores con movimientos:
+📊 OPERADOR + MOVIMIENTO / TEXTOBJECT
 
      OPERADOR + MOVIMIENTO = ACCIÓN
 
-Ejemplos:
-     d: Eliminar
-     ├─ dw: Eliminar palabra
-     ├─ de: Eliminar hasta fin palabra
-     ├─ d$: Eliminar hasta fin línea
-     ├─ dd: Eliminar línea
-     └─ d5w: Eliminar 5 palabras
+     d: Eliminar              y: Copiar               c: Cambiar
+     ├─ dw: palabra           ├─ yw: palabra          ├─ cw: palabra
+     ├─ d$: hasta fin línea   ├─ yy: línea            ├─ cc: línea
+     ├─ dd: línea             ├─ y$: hasta fin línea  ├─ c$: hasta fin línea
+     └─ d5w: 5 palabras       └─ yG: hasta fin arch.  └─ c5w: 5 palabras
 
-     y: Copiar/Yank
-     ├─ yw: Copiar palabra
-     ├─ yy: Copiar línea
-     ├─ y$: Copiar hasta fin línea
-     └─ yG: Copiar hasta fin archivo
+     OPERADOR + a/i + OBJETO = ACCIÓN      (a = con bordes, i = interior)
 
-     c: Cambiar/Change
-     ├─ cw: Cambiar palabra
-     ├─ cc: Cambiar línea
-     ├─ c$: Cambiar hasta fin línea
-     └─ c5w: Cambiar 5 palabras
+     ┌───────┬──────────────────────────┬────────────────────────────┐
+     │ Obj.  │ Qué es                   │ Ejemplo                    │
+     ├───────┼──────────────────────────┼────────────────────────────┤
+     │ f     │ Función (treesitter)     │ daf  borra la función      │
+     │ c     │ Clase (treesitter)       │ yac  copia la clase        │
+     │ o     │ Bloque / if / loop       │ cio  cambia el if          │
+     │ a     │ Argumento                │ dia  borra un argumento    │
+     │ q     │ Cualquier comilla        │ ciq  cambia el string      │
+     │ b     │ Cualquier paréntesis     │ dab  borra (...)           │
+     │ t     │ Tag HTML/JSX             │ cit  cambia el contenido   │
+     │ w / p │ Palabra / párrafo        │ diw, yap                   │
+     └───────┴──────────────────────────┴────────────────────────────┘
+
+     Modificadores:  n = siguiente   l = anterior
+          canf → cambia la SIGUIENTE función
+          dilq → borra dentro de las comillas ANTERIORES
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎁 SURROUND (mini.surround)
+
+     hola                  saiw"            "hola"
+                    (agregar a inner word)
+
+     "hola"                sr"'             'hola'
+                    (reemplazar " por ')
+
+     'hola'                sd'              hola
+                    (borrar ')
+
+     hola                  saiwt + div      <div>hola</div>
+                    (rodear con un tag)
+
+     En visual: selecciona y usa  sa"  para rodear la selección.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -142,6 +167,22 @@ Opciones:
      :%s/viejo/nuevo/g    Sin confirmación
      :%s/viejo/nuevo/gc   Con confirmación
      :1,10s/old/new/g     Solo líneas 1-10
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ FFF (BUSCAR ARCHIVOS Y TEXTO)
+
+     <Space><Space>: Buscar archivos
+            ↓
+        [Escribe para filtrar — ordena por frecency]
+            ↓
+        <CR>: Abrir      Esc: Cancelar
+
+Otras búsquedas:
+     <Space>sg: Live grep (buscar texto en el proyecto)
+     <Space>sw: Grep de la palabra bajo el cursor
+     <Space>fr: Archivos recientes
+     <Space>fb: Buffers abiertos
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -170,12 +211,14 @@ Después de sv (split vertical):
 
 Navegar:
      Ctrl+h: ←   Ctrl+j: ↓   Ctrl+k: ↑   Ctrl+l: →
+Cerrar:
+     Ctrl+w q
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📁 NEO-TREE (EXPLORADOR)
+📁 NVIM-TREE (EXPLORADOR)
 
-     <space>e: Toggle Neo-tree
+     <Space>e: Abrir / cerrar
             ↓
      ┌──────────────────────┐
      │ 📁 Carpeta           │
@@ -185,44 +228,42 @@ Navegar:
      │      └─ 📄 file.ts   │
      └──────────────────────┘
 
-Dentro de Neo-tree:
-     <space>: Toggle carpeta
-     <cr>/o: Abrir archivo
-     t: Abrir en tab
-     w: Abrir en split
-     d: Eliminar
-     r: Renombrar
-     y: Copiar
-     x: Cortar
-     p: Pegar
-     c: Crear archivo
-     m: Crear carpeta
-     q/Esc: Cerrar
+Dentro de nvim-tree:
+     <CR>/o: Abrir             a: Crear (termina en / = carpeta)
+     Ctrl+v: Split vertical    d: Eliminar
+     Ctrl+x: Split horizontal  r: Renombrar
+     Ctrl+t: Subir a padre     x / c / p: Cortar / copiar / pegar
+     H: Mostrar ocultos        R: Refrescar
+     ?: Ayuda                  q: Cerrar
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🌿 GIT WORKFLOW
 
 1. VER CAMBIOS:
-     <space>gn: Siguiente hunk
-     <space>gp: Hunk anterior
+     <Space>gn: Siguiente hunk
+     <Space>gp: Hunk anterior
+     <Space>ghp: Preview del hunk
 
-2. STAGE (Preparar cambios):
-     <space>gs: Stage hunk
-     <space>gS: Stage buffer completo
+2. STAGE (preparar cambios):
+     <Space>gs: Stage hunk (o selección en visual)
+     <Space>gS: Stage buffer completo
+     <Space>gu: Deshacer stage
 
-3. PREVIEW:
-     <space>ghp: Preview hunk
-
-4. COMMIT:
-     gg: LazyGit
+3. REVISAR:
+     <Space>dvo: Abrir Diffview
             ↓
-        [Hacer commit]
+        [Revisar todos los cambios]
             ↓
-        q: Salir
+     <Space>dvc: Cerrar
 
-5. BLAME (Ver quién cambió):
-     <space>gb: Git blame
+4. HISTORIAL:
+     <Space>dvf: Historial de archivos
+     <Space>gc:  Commits
+
+5. BLAME (ver quién cambió):
+     <Space>gb: Blame de la línea
+     <Space>gtb: Blame permanente on/off
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -230,77 +271,49 @@ Dentro de Neo-tree:
 
      K: Ver documentación
             ↓
-     <space>lnd: Ir a definición
+     gd: Ir a definición     (Ctrl+o para volver)
             ↓
-     <space>lra: Code actions (Fix, Refactor)
+     gr: Ver referencias
             ↓
-     <space>lrf: Format (Prettier, ESLint)
+     <Space>caa: Code actions (fix, refactor, imports)
             ↓
-     <space>lrn: Rename símbolo
+     <Space>crr: Renombrar símbolo
             ↓
-     <space>lsd: Ver símbolos documento
+     <Space>xx: Ver todos los errores (trouble)
+
+En modo insert:
+     Ctrl+s: Ayuda de firma (parámetros)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🧩 SNIPPETS DISPONIBLES
+💡 AUTOCOMPLETADO E IA
 
-TYPESCRIPT/REACT:
-     rfc<Tab>     React Functional Component
-     use<Tab>     useState hook
-     uef<Tab>     useEffect hook
-     asf<Tab>     async function
-     af<Tab>      arrow function
+     Escribes...  →  aparece el menú (blink.cmp)
+                         │
+                         ├─ Tab / ↓      : Siguiente sugerencia
+                         ├─ Shift+Tab / ↑: Anterior
+                         └─ Enter        : Aceptar (agrega paréntesis)
 
-PYTHON:
-     def<Tab>     def function():
-     cls<Tab>     class Name:
-     for<Tab>     for item in iterable:
-     if<Tab>      if condition:
-     try<Tab>     try: except:
-
-LUA:
-     fn<Tab>      function name()
-     lfn<Tab>     local function name()
-     tbl<Tab>     local table = {}
-
-Navegar dentro de snippet:
-     Ctrl+k: Siguiente placeholder
-     Ctrl+j: Placeholder anterior
-     Ctrl+l: Siguiente choice
-     Ctrl+h: Choice anterior
+     Texto gris al final (Supermaven IA)
+                         │
+                         ├─ Ctrl+l : Aceptar todo
+                         ├─ Ctrl+j : Aceptar una palabra
+                         └─ Ctrl+] : Descartar
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🔎 TELESCOPE (BÚSQUEDA)
+🧹 FORMATO AL GUARDAR
 
-     <space>ff: Find files
-            ↓
-        [Tipea para filtrar]
-            ↓
-        <cr>: Abrir
-        <Tab>: Multi-select
-        Esc: Cancelar
+     :w  →  conform.nvim formatea automáticamente
 
-Otras búsquedas:
-     <space>fg: Live grep (buscar en archivos)
-     <space>fb: Buffers (archivos abiertos)
-     <space>fgc: Git commits
-     <space>fgb: Git branches
+     Lua ................ stylua
+     JS/TS/JSON/CSS ..... biome
+     Python ............. isort + black
+     HTML/Markdown ...... prettier
+     Rust ............... rustfmt
+     Otros .............. LSP
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💻 TERMINAL FLOTANTE
-
-     <space>t: Toggle terminal
-            ↓
-     ┌─────────────────────────────────┐
-     │ $ npm start                     │
-     │ Compiled successfully           │
-     │ $                               │
-     └─────────────────────────────────┘
-            ↓
-     Esc/jk: Volver a Vim
-     Ctrl+h/j/k/l: Navegar ventanas
+     <Space>cf: Formatear a mano    :ConformInfo: Ver estado
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -311,9 +324,7 @@ Tu clipboard está sincronizado:
 En Nvim:
      y (yank)
             ↓
-     Ctrl+C en otras apps
-            ↓
-     Cmd+V (pega el contenido)
+     Cmd+V en otras apps (pega el contenido)
 
 En otras apps:
      Cmd+C (copy)
@@ -321,6 +332,8 @@ En otras apps:
      p en Nvim
             ↓
      Contenido pegado ✅
+
+Tip: en visual, p pega sin perder lo que tenías copiado.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -332,123 +345,90 @@ CON NÚMEROS (antes del comando):
      10j: Bajar 10 líneas
      2u:  Undo 2 veces
 
-TEXTO OBJECTS:
-     iw: inside word
-     aw: a word
-     i": inside quotes
-     a": a quotes
-     ib: inside brackets
-     ab: a brackets
-     ip: inside paragraph
-     ap: a paragraph
-
-EJEMPLOS:
-     diw: Eliminar palabra bajo cursor
-     ci": Cambiar contenido entre comillas
-     yab: Copiar brackets con contenido
-
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🎓 EJERCICIOS PARA PRACTICAR
 
 1. NAVEGACIÓN (5 min):
-   - Abre un archivo: <space>ff
-   - Salta al final: G
-   - Vuelve al inicio: gg
+   - Abre un archivo: <Space><Space>
+   - Salta al final: G  /  inicio: gg
    - Ve a línea 42: :42
+   - Salta entre funciones: ]f  [f
 
 2. EDICIÓN (5 min):
-   - Inserta texto: i
-   - Copia línea: yy
-   - Pega: p
-   - Elimina: dd
+   - Copia línea: yy   Pega: p   Elimina: dd
+   - Cambia el cuerpo de una función: cif
+   - Borra un argumento: dia
+   - Rodea una palabra con comillas: saiw"
 
 3. BÚSQUEDA (5 min):
-   - Busca: /palabra
-   - Siguiente: n
+   - En el archivo: /palabra, n
+   - En el proyecto: <Space>sg
    - Reemplaza: :%s/viejo/nuevo/gc
 
 4. VENTANAS (5 min):
-   - Split horizontal: qq
-   - Split vertical: sv
+   - Split horizontal: qq   vertical: sv
    - Navega: Ctrl+hjkl
    - Cierra: Ctrl+w q
 
 5. GIT (5 min):
-   - Ve cambios: <space>gn
-   - Stage: <space>gs
-   - Blame: <space>gb
-   - Commit: gg
+   - Ve cambios: <Space>gn
+   - Stage: <Space>gs
+   - Revisa: <Space>dvo
+   - Blame: <Space>gb
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📚 DOCUMENTACIÓN
 
 Dentro de Neovim:
-     :help                    Ayuda general
-     :help keymaps           Ayuda keybindings
-     :help lsp               Ayuda LSP
+     :help                   Ayuda general
+     :help vim.pack          Gestor de plugins
+     :help MiniAi            Textobjects
      :checkhealth            Diagnóstico
 
 Dashboard:
-     n: New file
-     f: Find file
-     r: Recent files
-     g: Live grep
-     b: Buffers
-     h: Help tags
-     c: Config
-     l: LSP info
-     m: Lazy manager
-     t: Restore session
-     q: Quit
+     n: Nuevo archivo        h: Buscar en la ayuda
+     f: Buscar archivo       c: Archivos de la config
+     r: Recientes            l: Estado del LSP
+     g: Live grep            m: Actualizar plugins
+     b: Buffers              t: Restaurar sesión
+                             q: Salir
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💪 PRO TIPS
 
-1. Repite el último comando:
+1. Repite el último cambio:
    .
 
 2. Macro recording:
    qa (start)
    ... acciones ...
    q (end)
-   @a (execute)
+   @a (execute)    @@ (repetir)
 
-3. Búsqueda sin case:
+3. Búsqueda sin distinguir mayúsculas:
    /\cpatrón
 
-4. Reemplaza palabra bajo cursor:
-   :%s//nueva/g
+4. Reemplaza lo último que buscaste:
+   *  (busca la palabra)  →  :%s//nueva/g
 
-5. Incremental search:
-   * o # (buscar palabra bajo cursor)
+5. Edición en columna (visual block):
+   Ctrl+v → selecciona → I o A → escribe → Esc
 
-6. Macro sobre múltiples líneas:
-   1. Marca inicio: ma
-   2. Marca fin: mb
-   3. Filtra: :'a,'bb (en ex)
+6. Viaje en el tiempo (undo persistente):
+   :earlier 10m     :later 10m
 
-7. Multiple cursors (visual):
-   Ctrl+v (visual block)
-   Selecciona
-   I (insert) o A (append)
-   Escribe
-   Esc
-
-8. Undo tree:
-   :undolist
-   :earlier Nm (n minutos atrás)
-   :later Nm
+7. Volver de un salto (gd, ]f, búsqueda):
+   Ctrl+o (atrás)   Ctrl+i (adelante)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🎉 ¡LISTO PARA USAR!
 
 Tu Neovim está completamente configurado.
-Práctica los comandos poco a poco.
+Practica los comandos poco a poco.
 ¡Pronto serás un ninja de Vim! 🥷
 
 ╚════════════════════════════════════════════════════════════════════════════╝
-
